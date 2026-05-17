@@ -3,12 +3,13 @@ package com.lance5057.extradelight.workstations.evaporator.recipes;
 import com.google.gson.JsonObject;
 import com.lance5057.extradelight.ExtraDelightBlocks;
 import com.lance5057.extradelight.ExtraDelightRecipes;
+import com.lance5057.extradelight.util.StackUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 //import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.core.HolderLookup.Provider;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 //import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -36,9 +37,9 @@ public class EvaporatorRecipe implements Recipe<EvaporatorRecipeWrapper> {
 		return output;
 	}
 
-	final FluidIngredient fluid;
+	final FluidStack fluid;
 
-	public FluidIngredient getFluid() {
+	public FluidStack getFluid() {
 		return fluid;
 	}
 
@@ -51,7 +52,7 @@ public class EvaporatorRecipe implements Recipe<EvaporatorRecipeWrapper> {
 		return display;
 	}
 
-	public EvaporatorRecipe(ResourceLocation id,String pGroup, FluidIngredient fluid, int time, ResourceLocation lootTable,
+	public EvaporatorRecipe(ResourceLocation id,String pGroup, FluidStack fluid, int time, ResourceLocation lootTable,
 			ResourceLocation displayBlock, ItemStack outItem) {
 		this.id = id;
 		this.group = pGroup;
@@ -64,7 +65,7 @@ public class EvaporatorRecipe implements Recipe<EvaporatorRecipeWrapper> {
 
 	@Override
 	public boolean matches(EvaporatorRecipeWrapper input, Level level) {
-		return this.fluid.test(input.tank.getFluid());
+		return this.fluid.isFluidStackIdentical(input.tank.getFluid());
 	}
 
 	@Override
@@ -168,7 +169,7 @@ public class EvaporatorRecipe implements Recipe<EvaporatorRecipeWrapper> {
 		public EvaporatorRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
 			String s= GsonHelper.getAsString(jsonObject, "group", "");
 			ResourceLocation displayBlock =new ResourceLocation(GsonHelper.getAsString(jsonObject, "display_block"));
-			FluidIngredient fliud = FluidIngredient.deserialize(GsonHelper.getAsJsonObject(jsonObject, "fluid"));
+			FluidStack fliud = StackUtil.FluidStackfromJson(GsonHelper.getAsJsonObject(jsonObject, "fluid"));
 			ResourceLocation lootTable=new ResourceLocation(GsonHelper.getAsString(jsonObject, "loottable"));
 			ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "outItem"));
 			int time = GsonHelper.getAsInt(jsonObject, "time", 200);
@@ -179,7 +180,7 @@ public class EvaporatorRecipe implements Recipe<EvaporatorRecipeWrapper> {
 		@Override
 		public @Nullable EvaporatorRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf friendlyByteBuf) {
 			String s=friendlyByteBuf.readUtf();
-			FluidIngredient fluid = FluidIngredient.read(friendlyByteBuf);
+			FluidStack fluid = friendlyByteBuf.readFluidStack();
 			int time = friendlyByteBuf.readInt();
 			ResourceLocation lootTable = friendlyByteBuf.readResourceLocation();
 			ResourceLocation displayBlock = friendlyByteBuf.readResourceLocation();
@@ -191,7 +192,7 @@ public class EvaporatorRecipe implements Recipe<EvaporatorRecipeWrapper> {
 		@Override
 		public void toNetwork(FriendlyByteBuf friendlyByteBuf, EvaporatorRecipe evaporatorRecipe) {
 			friendlyByteBuf.writeUtf(evaporatorRecipe.group);
-			evaporatorRecipe.fluid.write(friendlyByteBuf);
+			friendlyByteBuf.writeFluidStack(evaporatorRecipe.fluid);
 			friendlyByteBuf.writeInt(evaporatorRecipe.cookTime);
 			friendlyByteBuf.writeResourceLocation(evaporatorRecipe.output);  //lootTable
 			friendlyByteBuf.writeResourceLocation(evaporatorRecipe.display); //displayBlock

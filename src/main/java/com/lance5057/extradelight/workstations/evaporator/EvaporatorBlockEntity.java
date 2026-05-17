@@ -262,7 +262,7 @@ private final ItemStackHandler items = createHandler();
 
 					if (evaporator.cookTime >= evaporator.cookTimeTotal) {
 						dropLoot(evaporator, recipe.getOutput());
-						evaporator.tank.drain(recipe.getFluid().getRequiredAmount(), IFluidHandler.FluidAction.EXECUTE);
+						evaporator.tank.drain(recipe.getFluid().getAmount(), IFluidHandler.FluidAction.EXECUTE);
 					} else {
 						evaporator.cookTime++;
 					}

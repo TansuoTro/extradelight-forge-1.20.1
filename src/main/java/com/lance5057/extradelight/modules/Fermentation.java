@@ -905,7 +905,7 @@ public class Fermentation {
 
 		// Evaporating
 		EvaporatorRecipeBuilder
-				.evaporate(FluidIngredient.fromFluid(Fluids.WATER, 1000), new ItemStack(SALT.get(),1),
+				.evaporate(new FluidStack(Fluids.WATER, 1000), new ItemStack(SALT.get(),1),
 						MiscLootTables.EVAPORATOR_WATER.location(), 10000, SALT_BLOCK.get())
 				.unlockedBy("has_water", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WATER_BUCKET))
 				.save(consumer, ExtraDelight.modLoc("evaporate_water"));

@@ -67,7 +67,7 @@ public class EvaporatorRecipeCategory implements IRecipeCategory<EvaporatorRecip
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, EvaporatorRecipe recipe, IFocusGroup focuses) {
 
-        List<FluidStack> fluids = new ArrayList<>(recipe.getFluid().getMatchingFluidStacks());
+        List<FluidStack> fluids = List.of(recipe.getFluid());
 		builder.addSlot(RecipeIngredientRole.INPUT, this.getWidth() / 2 - 49, 1)
 				.addIngredients(ForgeTypes.FLUID_STACK, fluids)
 				.setFluidRenderer(1000, false, 16, 71);

@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.lance5057.extradelight.ExtraDelightRecipes;
 import com.lance5057.extradelight.util.StackUtil;
 import com.lance5057.extradelight.workstations.evaporator.recipes.EvaporatorRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraft.advancements.*;
 //import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
@@ -20,7 +20,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
-//import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+//import net.neoforged.neoforge.fluids.crafting.SizedFluidStack;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
@@ -30,7 +30,7 @@ import java.util.function.Consumer;
 public class EvaporatorRecipeBuilder implements RecipeBuilder {
 	@Nullable
 	private String group;
-	FluidIngredient fluid;
+	FluidStack fluid;
 	ResourceLocation lootTable;
 	Block display;
 	ItemStack out;
@@ -40,7 +40,7 @@ public class EvaporatorRecipeBuilder implements RecipeBuilder {
 
 	private final Map<String, Criterion> criteria = new LinkedHashMap<>();
 
-	public EvaporatorRecipeBuilder(FluidIngredient fluid, ItemStack out, ResourceLocation lootTable, int cookTime,
+	public EvaporatorRecipeBuilder(FluidStack fluid, ItemStack out, ResourceLocation lootTable, int cookTime,
 								   Block displayBlock) {
 		this.fluid = fluid;
 		this.lootTable = lootTable;
@@ -49,7 +49,7 @@ public class EvaporatorRecipeBuilder implements RecipeBuilder {
 		this.out = out;
 	}
 
-	public static EvaporatorRecipeBuilder evaporate(FluidIngredient fluid, ItemStack out, ResourceLocation lootTable,
+	public static EvaporatorRecipeBuilder evaporate(FluidStack fluid, ItemStack out, ResourceLocation lootTable,
 			int cookTime, Block displayBlock) {
 		return new EvaporatorRecipeBuilder(fluid, out, lootTable, cookTime, displayBlock);
 	}
@@ -117,7 +117,7 @@ public class EvaporatorRecipeBuilder implements RecipeBuilder {
 	public static class Result implements FinishedRecipe {
 		private final ResourceLocation id;
 		private final String group;
-		private final FluidIngredient fluid;
+		private final FluidStack fluid;
 		private final Block displayBlock;
 		private final ItemStack out;
 		private final int cookTime;
@@ -125,7 +125,7 @@ public class EvaporatorRecipeBuilder implements RecipeBuilder {
 		private final @org.jetbrains.annotations.Nullable ResourceLocation advancementId;
 		private ResourceLocation lootTable;
 
-		public Result(ResourceLocation id, String group, FluidIngredient fluid,ResourceLocation lootTable,
+		public Result(ResourceLocation id, String group, FluidStack fluid,ResourceLocation lootTable,
 					  Block displayBlock, ItemStack out,int cookTime,Advancement.Builder advancement,
 					  @org.jetbrains.annotations.Nullable ResourceLocation advancementId) {
 			this.id = id;
@@ -145,7 +145,7 @@ public class EvaporatorRecipeBuilder implements RecipeBuilder {
 				pJson.addProperty("group", this.group);
 			}
 			pJson.addProperty("display_block", ForgeRegistries.BLOCKS.getKey(this.displayBlock).toString());
-			pJson.add("fluid", this.fluid.serialize());
+			pJson.add("fluid", StackUtil.FluidStacktoJson(this.fluid));
 			pJson.addProperty("loottable", this.lootTable.toString());
 			pJson.add("outItem", StackUtil.ItemStacktoJson(this.out));
 			pJson.addProperty("time",this.cookTime);
