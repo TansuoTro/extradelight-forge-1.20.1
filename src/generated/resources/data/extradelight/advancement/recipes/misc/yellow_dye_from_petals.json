@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_petals": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extradelight:lemon_petal_litter_item"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extradelight:yellow_dye_from_petals"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_petals"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extradelight:yellow_dye_from_petals"
+    ]
+  }
+}

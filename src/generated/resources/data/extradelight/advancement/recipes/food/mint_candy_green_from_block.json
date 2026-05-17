@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extradelight:mint_candy_green_from_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "mint_candy_green": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extradelight:candy_cane_green"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "mint_candy_green"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extradelight:mint_candy_green_from_block"
+    ]
+  }
+}

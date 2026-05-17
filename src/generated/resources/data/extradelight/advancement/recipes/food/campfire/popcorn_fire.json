@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extradelight:campfire/popcorn_fire"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "popcorn_campfire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extradelight:popcorn"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "popcorn_campfire"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extradelight:campfire/popcorn_fire"
+    ]
+  }
+}

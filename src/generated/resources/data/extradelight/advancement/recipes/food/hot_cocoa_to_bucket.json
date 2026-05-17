@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extradelight:hot_cocoa_to_bucket"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hot_cocoa": {
+      "conditions": {
+        "items": [
+          {
+            "items": "farmersdelight:hot_cocoa"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "hot_cocoa"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extradelight:hot_cocoa_to_bucket"
+    ]
+  }
+}

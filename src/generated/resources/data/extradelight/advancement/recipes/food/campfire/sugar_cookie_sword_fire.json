@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extradelight:campfire/sugar_cookie_sword_fire"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "sugar_cookie_sword_campfire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extradelight:sugar_cookie_sword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "sugar_cookie_sword_campfire"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extradelight:campfire/sugar_cookie_sword_fire"
+    ]
+  }
+}

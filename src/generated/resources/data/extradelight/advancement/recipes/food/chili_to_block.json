@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "chili": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extradelight:chili"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extradelight:chili_to_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "chili"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extradelight:chili_to_block"
+    ]
+  }
+}

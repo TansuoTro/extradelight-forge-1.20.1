@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extradelight:gingham_pink"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "pink_gingham": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:white_wool"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "pink_gingham"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extradelight:gingham_pink"
+    ]
+  }
+}
