@@ -7,7 +7,7 @@ import com.lance5057.extradelight.util.StackUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+//import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -28,6 +28,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.nbt.CompoundTag;
 import javax.annotation.Nullable;
 //import net.neoforged.neoforge.common.util.RecipeMatcher;
 //import net.neoforged.neoforge.fluids.FluidStack;
@@ -44,10 +45,10 @@ public class MixingBowlRecipe implements Recipe<MixingBowlRecipeWrapper> {
 	final String group;
 	final ItemStack result;
 	final NonNullList<Ingredient> ingredients;
-	final List<FluidIngredient> fluids;
+	final List<FluidStack> fluids;
 //	private final boolean isSimple;
 
-	public MixingBowlRecipe(ResourceLocation id,String pGroup, NonNullList<Ingredient> pIngredients, List<FluidIngredient> pFluids,
+	public MixingBowlRecipe(ResourceLocation id,String pGroup, NonNullList<Ingredient> pIngredients, List<FluidStack> pFluids,
 			ItemStack pResult, int stirs, ItemStack usedItem) {
 		this.id = id;
 		this.stirs = stirs;
@@ -72,7 +73,7 @@ public class MixingBowlRecipe implements Recipe<MixingBowlRecipeWrapper> {
 		return this.ingredients;
 	}
 
-	public List<FluidIngredient> getFluids() {
+	public List<FluidStack> getFluids() {
 		return this.fluids;
 	}
 
@@ -108,10 +109,10 @@ public class MixingBowlRecipe implements Recipe<MixingBowlRecipeWrapper> {
 		int count = 0;
 		for (int i = 0; i < fluids.size(); i++) {
 			for (int j = 0; j < f.size(); j++) {
-				FluidIngredient f1 = fluids.get(i);
+				FluidStack f1 = fluids.get(i);
 				FluidStack f2 = f.get(j);
 
-				if (f1.test(f2)) {
+				if (f1.isFluidStackIdentical(f2)) {
 					count++;
 				}
 			}
@@ -187,9 +188,9 @@ public class MixingBowlRecipe implements Recipe<MixingBowlRecipeWrapper> {
 			}
 
 			JsonArray fluidJson = GsonHelper.getAsJsonArray(jsonObject,"fluids");
-			List<FluidIngredient> pFluids = new ArrayList<>();
+			List<FluidStack> pFluids = new ArrayList<>();
 			for (int j = 0; j < fluidJson.size(); j++) {
-				pFluids.add(FluidIngredient.deserialize(fluidJson.get(j)));
+				pFluids.add(StackUtil.FluidStackfromJson(fluidJson.get(j).getAsJsonObject()));
 			}
 
 			ItemStack result = CraftingHelper.getItemStack(
@@ -212,9 +213,9 @@ public class MixingBowlRecipe implements Recipe<MixingBowlRecipeWrapper> {
 				pIngredients.add(Ingredient.fromNetwork(friendlyByteBuf));
 			}
 			int FluidSize = friendlyByteBuf.readVarInt();
-			List<FluidIngredient> pFluids = NonNullList.create();
+			List<FluidStack> pFluids = new ArrayList<>();
 			for(int i=0;i<FluidSize;i++) {
-				pFluids.add(FluidIngredient.read(friendlyByteBuf));
+				pFluids.add(friendlyByteBuf.readFluidStack());
 			}
 			ItemStack result = friendlyByteBuf.readItem();
 			int stirs=friendlyByteBuf.readVarInt();
@@ -233,7 +234,7 @@ public class MixingBowlRecipe implements Recipe<MixingBowlRecipeWrapper> {
 			}
 			friendlyByteBuf.writeVarInt(mixingBowlRecipe.fluids.size());
 			for (int i = 0; i < mixingBowlRecipe.fluids.size(); i++) {
-				mixingBowlRecipe.fluids.get(i).write(friendlyByteBuf);
+				friendlyByteBuf.writeFluidStack(mixingBowlRecipe.fluids.get(i));
 			}
 			friendlyByteBuf.writeItemStack(mixingBowlRecipe.result,true);
 			friendlyByteBuf.writeVarInt(mixingBowlRecipe.stirs);

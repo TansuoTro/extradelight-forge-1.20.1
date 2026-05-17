@@ -6,7 +6,7 @@ import com.lance5057.extradelight.ExtraDelightTags;
 import com.lance5057.extradelight.util.BottleFluidRegistry;
 import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipe;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+//import com.simibubi.create.foundation.fluid.FluidIngredient;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -25,6 +25,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.phys.Vec2;
+import net.minecraftforge.fluids.FluidStack;
 //import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.Arrays;
@@ -88,18 +89,20 @@ public class MixingBowlRecipeCategory implements IRecipeCategory<MixingBowlRecip
 		builder.addSlot(RecipeIngredientRole.OUTPUT, this.getWidth() / 2 + 57, 29).addItemStack(output);
 
 		int off = 0;
-		for (FluidIngredient i : recipe.getFluids()) {
+		for (FluidStack i : recipe.getFluids()) {
 			builder.addSlot(RecipeIngredientRole.CATALYST, this.getWidth() / 2 - 49, 61 - (off * 12))
-					.addIngredients(ForgeTypes.FLUID_STACK, (i.getMatchingFluidStacks()))
-					.setFluidRenderer(i.getRequiredAmount(), false, 16, 12);
+					.addIngredients(ForgeTypes.FLUID_STACK, List.of(i))
+					.setFluidRenderer(i.getAmount(), false, 16, 12);
 			off++;
 		}
 
-		if (recipe.getFluids().size() > 0)
+		if (recipe.getFluids().size() > 0) {
+			FluidStack fs = recipe.getFluids().get(0);
 			builder.addSlot(RecipeIngredientRole.CATALYST, 1, 1)
 					.addIngredients(Ingredient.of(
-							BottleFluidRegistry.getBottleFromFluid(recipe.getFluids().get(0).matchingFluidStacks.get(0)),
-							new ItemStack(recipe.getFluids().get(0).getMatchingFluidStacks().get(0).getFluid().getBucket())));
+							BottleFluidRegistry.getBottleFromFluid(fs),
+							new ItemStack(fs.getFluid().getBucket())));
+		}
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import com.lance5057.extradelight.workstations.FancyTank;
 import com.lance5057.extradelight.workstations.IFancyTankHandler;
 import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipe;
 import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipeWrapper;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+//import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -34,6 +34,7 @@ import net.minecraft.world.level.block.state.BlockState;
 //import net.neoforged.neoforge.items.ItemStackHandler;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -386,9 +387,9 @@ public class MixingBowlBlockEntity extends BlockEntity implements IFancyTankHand
 		return InteractionResult.SUCCESS;
 	}
 
-	private void removeFluids(List<FluidIngredient> list) {
+	private void removeFluids(List<FluidStack> list) {
 		for (int i = 0; i < list.size(); i++) {
-			fluids.drain(list.get(i), IFluidHandler.FluidAction.EXECUTE);
+			fluids.drain(list.get(i).getAmount(), IFluidHandler.FluidAction.EXECUTE);
 		}
 	}
 
