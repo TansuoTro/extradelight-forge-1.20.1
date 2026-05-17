@@ -6,6 +6,7 @@ import com.lance5057.extradelight.workstations.doughshaping.recipes.DoughShaping
 import com.lance5057.extradelight.workstations.dryingrack.DryingRackRecipe;
 import com.lance5057.extradelight.workstations.dryingrack.DryingRackSerializer;
 import com.lance5057.extradelight.workstations.evaporator.recipes.EvaporatorRecipe;
+import com.lance5057.extradelight.workstations.juicer.JuicerRecipe;
 import com.lance5057.extradelight.workstations.meltingpot.MeltingPotRecipe;
 import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipe;
 import com.lance5057.extradelight.workstations.mortar.recipes.MortarRecipe;
@@ -31,6 +32,8 @@ public class ExtraDelightRecipes {
 			() -> registerRecipeType("dough_shaping"));
 	public static final Supplier<RecipeType<MortarRecipe>> MORTAR = RECIPE_TYPES.register("mortar",
 			() -> registerRecipeType("mortar"));
+	public static final Supplier<RecipeType<JuicerRecipe>> JUICER = RECIPE_TYPES.register("juicer",
+			() -> registerRecipeType("juicer"));
 	public static final Supplier<RecipeType<MixingBowlRecipe>> MIXING_BOWL = RECIPE_TYPES.register("mixing_bowl",
 			() -> registerRecipeType("mixing_bowl"));
 	public static final Supplier<RecipeType<DryingRackRecipe>> DRYING_RACK = RECIPE_TYPES.register("drying_rack",
@@ -84,6 +87,8 @@ public class ExtraDelightRecipes {
 			.register("dough_shaping", DoughShapingRecipe.Serializer::new);
 	public static final Supplier<RecipeSerializer<?>> MORTAR_SERIALIZER = RECIPE_SERIALIZERS.register("mortar",
 			MortarRecipe.Serializer::new);
+	public static final Supplier<RecipeSerializer<?>> JUICER_SERIALIZER = RECIPE_SERIALIZERS.register("juicer",
+			JuicerRecipe.Serializer::new);
 	public static final Supplier<RecipeSerializer<?>> MIXING_BOWL_SERIALIZER = RECIPE_SERIALIZERS
 			.register("mixing_bowl", MixingBowlRecipe.Serializer::new);
 	public static final Supplier<RecipeSerializer<?>> MELTING_POT_SERIALIZER = RECIPE_SERIALIZERS

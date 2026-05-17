@@ -1,0 +1,15 @@
+﻿{
+    "type":  "extradelight:juicer",
+    "chance":  25,
+    "fluidOut":  {
+                     "amount":  250,
+                     "fluid":  "extradelight:lemon_juice_fluid"
+                 },
+    "ingredient":  {
+                       "tag":  "forge:crops/lemon"
+                   },
+    "result":  {
+                   "count":  1,
+                   "item":  "minecraft:yellow_dye"
+               }
+}

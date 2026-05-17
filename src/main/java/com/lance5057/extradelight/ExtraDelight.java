@@ -37,6 +37,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.lance5057.extradelight.aesthetics.AestheticBlocks;
 import com.lance5057.extradelight.modules.Fermentation;
+import com.lance5057.extradelight.modules.SummerCitrus;
 import com.lance5057.extradelight.network.NetworkHandler;
 import com.lance5057.extradelight.worldgen.features.ExtraDelightFeatures;
 import com.lance5057.extradelight.worldgen.placers.FoliagePlacerRegistry;
@@ -78,6 +79,7 @@ public class ExtraDelight {
 		NetworkHandler.register();
 
 		Fermentation f = new Fermentation();
+		SummerCitrus citrus = new SummerCitrus();
 
 		AestheticBlocks.setup();
 		AestheticBlocks.BLOCKS.register(modEventBus);
@@ -86,6 +88,9 @@ public class ExtraDelight {
 //		ExtraDelightComponents.COMPONENTS.register(modEventBus);
 		ExtraDelightBlocks.register(modEventBus);
 		ExtraDelightFluids.register(modEventBus);
+		ExtraDelightPaintings.PAINTING_VARIANTS.register(modEventBus);
+		ExtraDelightBanners.BANNER_PATTERNS.register(modEventBus);
+		ExtraDelightParticles.PARTICLE_TYPES.register(modEventBus);
 
 //		PieceTypes.PIECES.register(modEventBus);
 
@@ -163,8 +168,9 @@ public class ExtraDelight {
 	public void setupCommon(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			ExtraDelightBlocks.setup();
+			SummerCitrus.setup();
 			ExtraDelightItems.setup();
-		//	PottedPlants.setup();
+			PottedPlants.setup();
 			registerItemSetAdditions();
 		});
 	}

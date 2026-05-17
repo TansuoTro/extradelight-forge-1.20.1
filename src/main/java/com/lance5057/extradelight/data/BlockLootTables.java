@@ -8,6 +8,7 @@ import com.lance5057.extradelight.blocks.*;
 import com.lance5057.extradelight.blocks.crops.*;
 import com.lance5057.extradelight.blocks.crops.corn.CornTop;
 import com.lance5057.extradelight.modules.Fermentation;
+import com.lance5057.extradelight.modules.SummerCitrus;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 //import net.minecraft.core.component.DataComponents;
@@ -423,26 +424,44 @@ public class BlockLootTables extends BlockLootSubProvider {
 		this.dropSelf(ExtraDelightBlocks.MELTING_POT.get());
 		this.dropSelf(ExtraDelightBlocks.CHILLER.get());
 		this.dropSelf(ExtraDelightBlocks.FUNNEL.get());
+		this.dropSelf(ExtraDelightBlocks.JUICER.get());
+		this.dropOther(ExtraDelightBlocks.FRUIT_BOWL.get(), Items.AIR);
 
-//		this.add(Blocks.BLACK_SHULKER_BOX, p_248609_ -> this.createShulkerBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.WHITE_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.ORANGE_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.MAGENTA_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
+//		this.add(Blocks.BLACK_SHULKER_BOX, block -> this.createShulkerBoxDrop(block));
+		this.add(ExtraDelightBlocks.WHITE_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.ORANGE_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.MAGENTA_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
 		this.add(ExtraDelightBlocks.LIGHT_BLUE_CHOCOLATE_BOX.get(),
-				p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.YELLOW_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.LIME_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.PINK_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.GRAY_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
+				block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.YELLOW_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.LIME_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.PINK_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.GRAY_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
 		this.add(ExtraDelightBlocks.LIGHT_GRAY_CHOCOLATE_BOX.get(),
-				p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.CYAN_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.BLUE_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.BROWN_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.GREEN_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.RED_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.BLACK_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
-		this.add(ExtraDelightBlocks.PURPLE_CHOCOLATE_BOX.get(), p_248609_ -> this.createChocolateBoxDrop(p_248609_));
+				block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.CYAN_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.BLUE_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.BROWN_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.GREEN_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.RED_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.BLACK_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.add(ExtraDelightBlocks.PURPLE_CHOCOLATE_BOX.get(), block -> this.createChocolateBoxDrop(block));
+		this.dropSelf(ExtraDelightBlocks.WHITE_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.ORANGE_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.MAGENTA_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.LIGHT_BLUE_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.YELLOW_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.LIME_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.PINK_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.GRAY_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.LIGHT_GRAY_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.CYAN_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.BLUE_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.BROWN_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.GREEN_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.RED_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.BLACK_PICNIC_BASKET.get());
+		this.dropSelf(ExtraDelightBlocks.PURPLE_PICNIC_BASKET.get());
 
 		feast(ExtraDelightBlocks.BROWNIES.get(), ExtraDelightItems.BROWNIES_BLOCK.get(),
 				ExtraDelightItems.SQUARE_PAN.get());
@@ -472,7 +491,7 @@ public class BlockLootTables extends BlockLootSubProvider {
 		this.dropSelf(ExtraDelightBlocks.MARSHMALLOW_BLOCK.get());
 		this.dropSelf(ExtraDelightBlocks.GOLDEN_CARROT_CRATE.get());
 
-		this.add(ExtraDelightBlocks.JAR.get(), p_248609_ -> this.createJarDrop(p_248609_));
+		this.add(ExtraDelightBlocks.JAR.get(), block -> this.createJarDrop(block));
 
 		this.createFruitLeavesDrop(ExtraDelightBlocks.APPLE_LEAVES.get(), ExtraDelightBlocks.APPLE_SAPLING.get(),
 				Items.APPLE);
@@ -580,6 +599,26 @@ public class BlockLootTables extends BlockLootSubProvider {
 		add(ExtraDelightBlocks.POTTED_CINNAMON_SAPLING.get(), createPotFlowerItemTable(ExtraDelightBlocks.CINNAMON_SAPLING.get()));
 		add(ExtraDelightBlocks.POTTED_HAZELNUT_SAPLING.get(), createPotFlowerItemTable(ExtraDelightBlocks.HAZELNUT_SAPLING.get()));
 		add(ExtraDelightBlocks.POTTED_APPLE_SAPLING.get(), createPotFlowerItemTable(ExtraDelightBlocks.APPLE_SAPLING.get()));
+		createFruitLeavesDrop(SummerCitrus.LEMON_LEAVES.get(), SummerCitrus.LEMON_SAPLING.get(), SummerCitrus.LEMON.get());
+		dropSelf(SummerCitrus.LEMON_SAPLING.get());
+		dropSelf(SummerCitrus.LEMON_PETAL_LITTER.get());
+		dropSelf(SummerCitrus.LEMON_CRATE.get());
+		add(SummerCitrus.POTTED_LEMON_SAPLING.get(), createPotFlowerItemTable(SummerCitrus.LEMON_SAPLING.get()));
+		createFruitLeavesDrop(SummerCitrus.LIME_LEAVES.get(), SummerCitrus.LIME_SAPLING.get(), SummerCitrus.LIME.get());
+		dropSelf(SummerCitrus.LIME_SAPLING.get());
+		dropSelf(SummerCitrus.LIME_PETAL_LITTER.get());
+		dropSelf(SummerCitrus.LIME_CRATE.get());
+		add(SummerCitrus.POTTED_LIME_SAPLING.get(), createPotFlowerItemTable(SummerCitrus.LIME_SAPLING.get()));
+		createFruitLeavesDrop(SummerCitrus.ORANGE_LEAVES.get(), SummerCitrus.ORANGE_SAPLING.get(), SummerCitrus.ORANGE.get());
+		dropSelf(SummerCitrus.ORANGE_SAPLING.get());
+		dropSelf(SummerCitrus.ORANGE_PETAL_LITTER.get());
+		dropSelf(SummerCitrus.ORANGE_CRATE.get());
+		add(SummerCitrus.POTTED_ORANGE_SAPLING.get(), createPotFlowerItemTable(SummerCitrus.ORANGE_SAPLING.get()));
+		createFruitLeavesDrop(SummerCitrus.GRAPEFRUIT_LEAVES.get(), SummerCitrus.GRAPEFRUIT_SAPLING.get(), SummerCitrus.GRAPEFRUIT.get());
+		dropSelf(SummerCitrus.GRAPEFRUIT_SAPLING.get());
+		dropSelf(SummerCitrus.GRAPEFRUIT_PETAL_LITTER.get());
+		dropSelf(SummerCitrus.GRAPEFRUIT_CRATE.get());
+		add(SummerCitrus.POTTED_GRAPEFRUIT_SAPLING.get(), createPotFlowerItemTable(SummerCitrus.GRAPEFRUIT_SAPLING.get()));
 	}
 
 	protected void createFruitBushDrop(Block bush, Item fruit) {

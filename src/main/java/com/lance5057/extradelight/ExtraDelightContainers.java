@@ -1,6 +1,7 @@
 package com.lance5057.extradelight;
 
 import com.lance5057.extradelight.blocks.countercabinet.CounterCabinetMenu;
+import com.lance5057.extradelight.blocks.picnicbasket.PicnicBasketMenu;
 import com.lance5057.extradelight.blocks.sink.SinkCabinetMenu;
 import com.lance5057.extradelight.displays.food.FoodDisplayMenu;
 import com.lance5057.extradelight.displays.knife.KnifeBlockMenu;
@@ -63,6 +64,8 @@ public class ExtraDelightContainers {
 
 	public static final RegistryObject<MenuType<VatMenu>> VAT_MENU = MENU_TYPES.register("vat",
 			() -> IForgeMenuType.create(VatMenu::new));
+	public static final RegistryObject<MenuType<PicnicBasketMenu>> PICNIC_BASKET_MENU = MENU_TYPES
+			.register("picnic_basket", () -> IForgeMenuType.create(PicnicBasketMenu::new));
 
 	public static void register(IEventBus modBus) {
 		MENU_TYPES.register(modBus);

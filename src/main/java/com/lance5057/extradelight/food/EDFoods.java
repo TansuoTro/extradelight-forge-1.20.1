@@ -39,6 +39,14 @@ public class EDFoods {
 	public static final Supplier<MobEffectInstance> PICKLED_TWO = () -> new MobEffectInstance(ExtraDelightMobEffects.PICKLED.get(),FoodValues.LONG_DURATION,1);
 	public static final Supplier<MobEffectInstance> PICKLED_THREE = () -> new MobEffectInstance(ExtraDelightMobEffects.PICKLED.get(),FoodValues.LONG_DURATION,2);
 	public static final Supplier<MobEffectInstance> PICKLED_FOUR = () -> new MobEffectInstance(ExtraDelightMobEffects.PICKLED.get(),FoodValues.LONG_DURATION,3);
+	public static final Supplier<MobEffectInstance> SOUR_PUCKER_ONE = () -> new MobEffectInstance(ExtraDelightMobEffects.SOUR_PUCKER.get(),FoodValues.BRIEF_DURATION,0);
+	public static final Supplier<MobEffectInstance> SOUR_PUCKER_TWO = () -> new MobEffectInstance(ExtraDelightMobEffects.SOUR_PUCKER.get(),FoodValues.BRIEF_DURATION,1);
+	public static final Supplier<MobEffectInstance> SOUR_PUCKER_THREE = () -> new MobEffectInstance(ExtraDelightMobEffects.SOUR_PUCKER.get(),FoodValues.BRIEF_DURATION,2);
+	public static final Supplier<MobEffectInstance> SOUR_PUCKER_FOUR = () -> new MobEffectInstance(ExtraDelightMobEffects.SOUR_PUCKER.get(),FoodValues.BRIEF_DURATION,3);
+	public static final Supplier<MobEffectInstance> SUNSHINE_ONE = () -> new MobEffectInstance(ExtraDelightMobEffects.SUNSHINE.get(),FoodValues.LONG_DURATION,0);
+	public static final Supplier<MobEffectInstance> SUNSHINE_TWO = () -> new MobEffectInstance(ExtraDelightMobEffects.SUNSHINE.get(),FoodValues.LONG_DURATION,1);
+	public static final Supplier<MobEffectInstance> SUNSHINE_THREE = () -> new MobEffectInstance(ExtraDelightMobEffects.SUNSHINE.get(),FoodValues.LONG_DURATION,2);
+	public static final Supplier<MobEffectInstance> SUNSHINE_FOUR = () -> new MobEffectInstance(ExtraDelightMobEffects.SUNSHINE.get(),FoodValues.LONG_DURATION,3);
 
 	public static final FoodProperties NOTFOOD = new FoodProperties.Builder().nutrition(0).saturationMod(0f).alwaysEat().build();
 	public static final FoodProperties BADFOOD = new FoodProperties.Builder().nutrition(2).saturationMod(0.1f).effect(ROT, 1F).build(); //.build(); //.usingConvertsTo(Items.BOWL).build();
@@ -84,6 +92,10 @@ public class EDFoods {
 	public static final FoodProperties JAM_BREAD = new FoodProperties.Builder().nutrition(2).saturationMod(0.6f).build();
 	public static final FoodProperties GLOW_JAM_BREAD = new FoodProperties.Builder().nutrition(2).saturationMod(0.6f).effect(GLOW_SHORT, 1F).build();
 	public static final FoodProperties GOLDEN_JAM_BREAD = new FoodProperties.Builder().nutrition(4).saturationMod(1.2f).effect(GOLDEN_APPLE_1, 1F).effect(GOLDEN_APPLE_2, 1F).build();
+	public static final FoodProperties LEMON = new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).effect(SOUR_PUCKER_THREE, 1F).build();
+	public static final FoodProperties LIME = new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).effect(SOUR_PUCKER_FOUR, 1F).build();
+	public static final FoodProperties ORANGE = new FoodProperties.Builder().nutrition(2).saturationMod(0.3f).effect(SOUR_PUCKER_TWO, 0.5F).build();
+	public static final FoodProperties GRAPEFRUIT = new FoodProperties.Builder().nutrition(3).saturationMod(0.3f).effect(SOUR_PUCKER_ONE, 0.5F).build();
 	public static final FoodProperties SCRAMBLED_EGGS = new FoodProperties.Builder().nutrition(4).saturationMod(0.4f).build();
 	public static final FoodProperties OMELETTE = new FoodProperties.Builder().nutrition(12).saturationMod(0.8f).build();
 	public static final FoodProperties QUICHE = new FoodProperties.Builder().nutrition(4).saturationMod(0.8f).build();

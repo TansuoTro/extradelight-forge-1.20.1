@@ -3,6 +3,7 @@ package com.lance5057.extradelight;
 import com.lance5057.extradelight.aesthetics.AestheticBlocks;
 import com.lance5057.extradelight.blocks.*;
 import com.lance5057.extradelight.blocks.chocolatebox.ChocolateBoxBlock;
+import com.lance5057.extradelight.blocks.picnicbasket.PicnicBasketBlock;
 import com.lance5057.extradelight.blocks.crops.*;
 import com.lance5057.extradelight.blocks.crops.corn.CornBottom;
 import com.lance5057.extradelight.blocks.crops.corn.CornTop;
@@ -15,10 +16,12 @@ import com.lance5057.extradelight.blocks.keg.KegBlock;
 import com.lance5057.extradelight.blocks.lid.LidBlock;
 import com.lance5057.extradelight.data.MiscLootTables;
 import com.lance5057.extradelight.displays.candybowl.CandyBowlBlock;
+import com.lance5057.extradelight.displays.fruitbowl.FruitBowlBlock;
 import com.lance5057.extradelight.workstations.chiller.ChillerBlock;
 import com.lance5057.extradelight.workstations.doughshaping.DoughShapingBlock;
 import com.lance5057.extradelight.workstations.dryingrack.DryingRackBlock;
 import com.lance5057.extradelight.workstations.evaporator.EvaporatorBlock;
+import com.lance5057.extradelight.workstations.juicer.JuicerBlock;
 import com.lance5057.extradelight.workstations.meltingpot.MeltingPotBlock;
 import com.lance5057.extradelight.workstations.mixingbowl.MixingBowlBlock;
 import com.lance5057.extradelight.workstations.mortar.MortarBlock;
@@ -137,6 +140,26 @@ public class ExtraDelightBlocks {
 	public static final RegistryObject<Block> VAT = BLOCKS.register("vat", VatBlock::new);
 	public static final RegistryObject<Block> EVAPORATOR = BLOCKS.register("evaporator", EvaporatorBlock::new);
 	public static final RegistryObject<LidBlock> LID = BLOCKS.register("lid", LidBlock::new);
+	public static final RegistryObject<JuicerBlock> JUICER = BLOCKS.register("juicer",
+			() -> new JuicerBlock(Properties.copy(Blocks.BARREL).noOcclusion()));
+	public static final RegistryObject<Block> FRUIT_BOWL = BLOCKS.register("fruit_bowl",
+			() -> new FruitBowlBlock(Properties.copy(Blocks.ACACIA_PLANKS)));
+	public static final RegistryObject<Block> WHITE_PICNIC_BASKET = BLOCKS.register("white_picnic_basket", () -> new PicnicBasketBlock(DyeColor.WHITE, Properties.copy(Blocks.WHITE_WOOL)));
+	public static final RegistryObject<Block> ORANGE_PICNIC_BASKET = BLOCKS.register("orange_picnic_basket", () -> new PicnicBasketBlock(DyeColor.ORANGE, Properties.copy(Blocks.ORANGE_WOOL)));
+	public static final RegistryObject<Block> MAGENTA_PICNIC_BASKET = BLOCKS.register("magenta_picnic_basket", () -> new PicnicBasketBlock(DyeColor.MAGENTA, Properties.copy(Blocks.MAGENTA_WOOL)));
+	public static final RegistryObject<Block> LIGHT_BLUE_PICNIC_BASKET = BLOCKS.register("light_blue_picnic_basket", () -> new PicnicBasketBlock(DyeColor.LIGHT_BLUE, Properties.copy(Blocks.LIGHT_BLUE_WOOL)));
+	public static final RegistryObject<Block> YELLOW_PICNIC_BASKET = BLOCKS.register("yellow_picnic_basket", () -> new PicnicBasketBlock(DyeColor.YELLOW, Properties.copy(Blocks.YELLOW_WOOL)));
+	public static final RegistryObject<Block> LIME_PICNIC_BASKET = BLOCKS.register("lime_picnic_basket", () -> new PicnicBasketBlock(DyeColor.LIME, Properties.copy(Blocks.LIME_WOOL)));
+	public static final RegistryObject<Block> PINK_PICNIC_BASKET = BLOCKS.register("pink_picnic_basket", () -> new PicnicBasketBlock(DyeColor.PINK, Properties.copy(Blocks.PINK_WOOL)));
+	public static final RegistryObject<Block> GRAY_PICNIC_BASKET = BLOCKS.register("gray_picnic_basket", () -> new PicnicBasketBlock(DyeColor.GRAY, Properties.copy(Blocks.GRAY_WOOL)));
+	public static final RegistryObject<Block> LIGHT_GRAY_PICNIC_BASKET = BLOCKS.register("light_gray_picnic_basket", () -> new PicnicBasketBlock(DyeColor.LIGHT_GRAY, Properties.copy(Blocks.LIGHT_GRAY_WOOL)));
+	public static final RegistryObject<Block> CYAN_PICNIC_BASKET = BLOCKS.register("cyan_picnic_basket", () -> new PicnicBasketBlock(DyeColor.CYAN, Properties.copy(Blocks.CYAN_WOOL)));
+	public static final RegistryObject<Block> BLUE_PICNIC_BASKET = BLOCKS.register("blue_picnic_basket", () -> new PicnicBasketBlock(DyeColor.BLUE, Properties.copy(Blocks.BLUE_WOOL)));
+	public static final RegistryObject<Block> BROWN_PICNIC_BASKET = BLOCKS.register("brown_picnic_basket", () -> new PicnicBasketBlock(DyeColor.BROWN, Properties.copy(Blocks.BROWN_WOOL)));
+	public static final RegistryObject<Block> GREEN_PICNIC_BASKET = BLOCKS.register("green_picnic_basket", () -> new PicnicBasketBlock(DyeColor.GREEN, Properties.copy(Blocks.GREEN_WOOL)));
+	public static final RegistryObject<Block> RED_PICNIC_BASKET = BLOCKS.register("red_picnic_basket", () -> new PicnicBasketBlock(DyeColor.RED, Properties.copy(Blocks.RED_WOOL)));
+	public static final RegistryObject<Block> BLACK_PICNIC_BASKET = BLOCKS.register("black_picnic_basket", () -> new PicnicBasketBlock(DyeColor.BLACK, Properties.copy(Blocks.BLACK_WOOL)));
+	public static final RegistryObject<Block> PURPLE_PICNIC_BASKET = BLOCKS.register("purple_picnic_basket", () -> new PicnicBasketBlock(DyeColor.PURPLE, Properties.copy(Blocks.PURPLE_WOOL)));
 
 	public static final RegistryObject<Block> FLOUR = BLOCKS.register("flour", () -> new CarpetBlock(
 			Properties.copy(Blocks.MOSS_BLOCK).strength(0.1F, 0.0F).sound(SoundType.WOOL).noOcclusion()));

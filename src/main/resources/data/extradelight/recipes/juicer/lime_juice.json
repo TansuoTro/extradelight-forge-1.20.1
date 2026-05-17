@@ -1,0 +1,15 @@
+﻿{
+    "type":  "extradelight:juicer",
+    "chance":  25,
+    "fluidOut":  {
+                     "amount":  250,
+                     "fluid":  "extradelight:lime_juice_fluid"
+                 },
+    "ingredient":  {
+                       "tag":  "forge:crops/lime"
+                   },
+    "result":  {
+                   "count":  1,
+                   "item":  "minecraft:lime_dye"
+               }
+}

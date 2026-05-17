@@ -8,5 +8,9 @@ public class PottedPlants {
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ExtraDelightBlocks.CINNAMON_SAPLING.getId(), ExtraDelightBlocks.POTTED_CINNAMON_SAPLING);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ExtraDelightBlocks.HAZELNUT_SAPLING.getId(), ExtraDelightBlocks.POTTED_HAZELNUT_SAPLING);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ExtraDelightBlocks.APPLE_SAPLING.getId(), ExtraDelightBlocks.POTTED_APPLE_SAPLING);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(com.lance5057.extradelight.modules.SummerCitrus.LEMON_SAPLING.getId(), com.lance5057.extradelight.modules.SummerCitrus.POTTED_LEMON_SAPLING);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(com.lance5057.extradelight.modules.SummerCitrus.LIME_SAPLING.getId(), com.lance5057.extradelight.modules.SummerCitrus.POTTED_LIME_SAPLING);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(com.lance5057.extradelight.modules.SummerCitrus.ORANGE_SAPLING.getId(), com.lance5057.extradelight.modules.SummerCitrus.POTTED_ORANGE_SAPLING);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(com.lance5057.extradelight.modules.SummerCitrus.GRAPEFRUIT_SAPLING.getId(), com.lance5057.extradelight.modules.SummerCitrus.POTTED_GRAPEFRUIT_SAPLING);
     }
 }

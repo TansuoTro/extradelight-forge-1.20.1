@@ -9,11 +9,13 @@ import com.lance5057.extradelight.blocks.entities.TapBlockEntity;
 import com.lance5057.extradelight.blocks.funnel.FunnelBlockEntity;
 import com.lance5057.extradelight.blocks.jar.JarBlockEntity;
 import com.lance5057.extradelight.blocks.keg.KegBlockEntity;
+import com.lance5057.extradelight.blocks.picnicbasket.PicnicBasketBlockEntity;
 import com.lance5057.extradelight.blocks.sink.SinkCabinetBlockEntity;
 import com.lance5057.extradelight.capabilities.Chill;
 import com.lance5057.extradelight.capabilities.DynamicItem;
 import com.lance5057.extradelight.displays.candybowl.CandyBowlEntity;
 import com.lance5057.extradelight.displays.food.FoodDisplayEntity;
+import com.lance5057.extradelight.displays.fruitbowl.FruitBowlBlockEntity;
 import com.lance5057.extradelight.displays.knife.KnifeBlockEntity;
 import com.lance5057.extradelight.displays.spice.SpiceRackEntity;
 import com.lance5057.extradelight.displays.wreath.WreathEntity;
@@ -21,6 +23,7 @@ import com.lance5057.extradelight.items.dynamicfood.api.DynamicItemComponent;
 import com.lance5057.extradelight.workstations.chiller.ChillerBlockEntity;
 import com.lance5057.extradelight.workstations.dryingrack.DryingRackBlockEntity;
 import com.lance5057.extradelight.workstations.evaporator.EvaporatorBlockEntity;
+import com.lance5057.extradelight.workstations.juicer.JuicerBlockEntity;
 import com.lance5057.extradelight.workstations.meltingpot.MeltingPotBlockEntity;
 import com.lance5057.extradelight.workstations.mixingbowl.MixingBowlBlockEntity;
 import com.lance5057.extradelight.workstations.mortar.MortarBlockEntity;
@@ -121,11 +124,14 @@ public class CapabilityHandler {
     public static void attachBlockEntityCapability(AttachCapabilitiesEvent<BlockEntity> event) {
         BlockEntity be = event.getObject();
         if(be instanceof CandyBowlEntity cbe){addItemHandler(event,"candy_bowl",cbe::getItemHandler);}
+        if(be instanceof FruitBowlBlockEntity cbe){addItemHandler(event,"fruit_bowl",cbe::getItemHandler);}
         if(be instanceof DryingRackBlockEntity cbe){addItemHandler(event,"drying_rack",cbe::getItemHandler);}
         if(be instanceof FoodDisplayEntity cbe){addItemHandler(event,"food_display",cbe::getItemHandler);}
         if(be instanceof KnifeBlockEntity cbe){addItemHandler(event,"Knife_block",cbe::getItemHandler);}
         if(be instanceof MixingBowlBlockEntity cbe){addItemFluidHandler(event,"mixing_bowl",cbe::getItemHandler,cbe::getFluidTank);}
         if(be instanceof MortarBlockEntity cbe){addItemFluidHandler(event,"mortar",cbe::getItemHandler,cbe::getFluidTank);}
+        if(be instanceof JuicerBlockEntity cbe){addItemFluidHandler(event,"juicer",cbe::getItemHandler,cbe::getFluidTank);}
+        if(be instanceof PicnicBasketBlockEntity cbe){addItemHandler(event,"picnic_basket",cbe::getItems);}
 
         if(be instanceof OvenBlockEntity cbe){
             event.addCapability(ResourceLocation.fromNamespaceAndPath(ExtraDelight.MOD_ID, "oven_block"),

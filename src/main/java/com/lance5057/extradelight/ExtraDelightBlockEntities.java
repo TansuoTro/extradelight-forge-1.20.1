@@ -4,6 +4,7 @@ import com.lance5057.extradelight.aesthetics.AestheticBlocks;
 import com.lance5057.extradelight.aesthetics.block.cornhuskdoll.CornHuskDollBlockEntity;
 import com.lance5057.extradelight.blocks.chocolatebox.ChocolateBoxBlockEntity;
 import com.lance5057.extradelight.blocks.countercabinet.CounterCabinetBlockEntity;
+import com.lance5057.extradelight.blocks.picnicbasket.PicnicBasketBlockEntity;
 import com.lance5057.extradelight.blocks.entities.TapBlockEntity;
 import com.lance5057.extradelight.blocks.funnel.FunnelBlockEntity;
 import com.lance5057.extradelight.blocks.jar.JarBlockEntity;
@@ -12,6 +13,7 @@ import com.lance5057.extradelight.blocks.keg.KegBlockEntity;
 import com.lance5057.extradelight.blocks.sink.SinkCabinetBlockEntity;
 import com.lance5057.extradelight.displays.candybowl.CandyBowlEntity;
 import com.lance5057.extradelight.displays.food.FoodDisplayEntity;
+import com.lance5057.extradelight.displays.fruitbowl.FruitBowlBlockEntity;
 import com.lance5057.extradelight.displays.knife.KnifeBlockEntity;
 import com.lance5057.extradelight.displays.spice.SpiceRackEntity;
 import com.lance5057.extradelight.displays.wreath.WreathEntity;
@@ -19,6 +21,7 @@ import com.lance5057.extradelight.modules.Fermentation;
 import com.lance5057.extradelight.workstations.chiller.ChillerBlockEntity;
 import com.lance5057.extradelight.workstations.dryingrack.DryingRackBlockEntity;
 import com.lance5057.extradelight.workstations.evaporator.EvaporatorBlockEntity;
+import com.lance5057.extradelight.workstations.juicer.JuicerBlockEntity;
 import com.lance5057.extradelight.workstations.meltingpot.MeltingPotBlockEntity;
 import com.lance5057.extradelight.workstations.mixingbowl.MixingBowlBlockEntity;
 import com.lance5057.extradelight.workstations.mortar.MortarBlockEntity;
@@ -86,6 +89,9 @@ public class ExtraDelightBlockEntities {
 	public static final RegistryObject<BlockEntityType<MortarBlockEntity>> MORTAR = TILES
 			.register("mortar", () -> BlockEntityType.Builder
 					.of(MortarBlockEntity::new, ExtraDelightBlocks.MORTAR_STONE.get()).build(null));
+	public static final RegistryObject<BlockEntityType<JuicerBlockEntity>> JUICER = TILES
+			.register("juicer", () -> BlockEntityType.Builder
+					.of(JuicerBlockEntity::new, ExtraDelightBlocks.JUICER.get()).build(null));
 
 	public static final RegistryObject<BlockEntityType<MixingBowlBlockEntity>> MIXING_BOWL = TILES
 			.register("mixing_bowl", () -> BlockEntityType.Builder
@@ -102,6 +108,20 @@ public class ExtraDelightBlockEntities {
 	public static final RegistryObject<BlockEntityType<CandyBowlEntity>> CANDY_BOWL = TILES
 			.register("candy_bowl", () -> BlockEntityType.Builder
 					.of(CandyBowlEntity::new, ExtraDelightBlocks.CANDY_BOWL.get()).build(null));
+	public static final RegistryObject<BlockEntityType<FruitBowlBlockEntity>> FRUIT_BOWL = TILES
+			.register("fruit_bowl", () -> BlockEntityType.Builder
+					.of(FruitBowlBlockEntity::new, ExtraDelightBlocks.FRUIT_BOWL.get()).build(null));
+	public static final RegistryObject<BlockEntityType<PicnicBasketBlockEntity>> PICNIC_BASKET = TILES
+			.register("picnic_basket", () -> BlockEntityType.Builder.of(PicnicBasketBlockEntity::new,
+					ExtraDelightBlocks.WHITE_PICNIC_BASKET.get(), ExtraDelightBlocks.ORANGE_PICNIC_BASKET.get(),
+					ExtraDelightBlocks.MAGENTA_PICNIC_BASKET.get(), ExtraDelightBlocks.LIGHT_BLUE_PICNIC_BASKET.get(),
+					ExtraDelightBlocks.YELLOW_PICNIC_BASKET.get(), ExtraDelightBlocks.LIME_PICNIC_BASKET.get(),
+					ExtraDelightBlocks.PINK_PICNIC_BASKET.get(), ExtraDelightBlocks.GRAY_PICNIC_BASKET.get(),
+					ExtraDelightBlocks.LIGHT_GRAY_PICNIC_BASKET.get(), ExtraDelightBlocks.CYAN_PICNIC_BASKET.get(),
+					ExtraDelightBlocks.BLUE_PICNIC_BASKET.get(), ExtraDelightBlocks.BROWN_PICNIC_BASKET.get(),
+					ExtraDelightBlocks.GREEN_PICNIC_BASKET.get(), ExtraDelightBlocks.RED_PICNIC_BASKET.get(),
+					ExtraDelightBlocks.BLACK_PICNIC_BASKET.get(), ExtraDelightBlocks.PURPLE_PICNIC_BASKET.get())
+					.build(null));
 
 	public static final RegistryObject<BlockEntityType<TapBlockEntity>> TAP = TILES.register("tap",
 			() -> BlockEntityType.Builder.of(TapBlockEntity::new, ExtraDelightBlocks.TAP.get()).build(null));

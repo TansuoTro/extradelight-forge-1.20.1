@@ -113,6 +113,10 @@ public class ExtraDelightItems {
 		DispenserBlock.registerBehavior(ExtraDelightItems.WHITE_CHOCOLATE_SYRUP_FLUID_BUCKET.get(),
 				DispenseFluidContainer.getInstance());
 		DispenserBlock.registerBehavior(Fermentation.PICKLE_JUICE_FLUID_BUCKET.get(), DispenseFluidContainer.getInstance());
+		DispenserBlock.registerBehavior(com.lance5057.extradelight.modules.SummerCitrus.LEMON_JUICE_FLUID_BUCKET.get(), DispenseFluidContainer.getInstance());
+		DispenserBlock.registerBehavior(com.lance5057.extradelight.modules.SummerCitrus.LIME_JUICE_FLUID_BUCKET.get(), DispenseFluidContainer.getInstance());
+		DispenserBlock.registerBehavior(com.lance5057.extradelight.modules.SummerCitrus.ORANGE_JUICE_FLUID_BUCKET.get(), DispenseFluidContainer.getInstance());
+		DispenserBlock.registerBehavior(com.lance5057.extradelight.modules.SummerCitrus.GRAPEFRUIT_JUICE_FLUID_BUCKET.get(), DispenseFluidContainer.getInstance());
 	}
 
 	// Helper methods
@@ -165,6 +169,26 @@ public class ExtraDelightItems {
 			() -> new HelmetBlockItem(ExtraDelightBlocks.LID.get(),
 					new Item.Properties()));
 							//.component(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY)));
+	public static final RegistryObject<Item> JUICER = ITEMS.register("juicer",
+			() -> new BlockItem(ExtraDelightBlocks.JUICER.get(), new Item.Properties()));
+	public static final RegistryObject<Item> FRUIT_BOWL = ITEMS.register("fruit_bowl",
+			() -> new BlockItem(ExtraDelightBlocks.FRUIT_BOWL.get(), new Item.Properties()));
+	public static final RegistryObject<Item> WHITE_PICNIC_BASKET = ITEMS.register("white_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.WHITE_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> ORANGE_PICNIC_BASKET = ITEMS.register("orange_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.ORANGE_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> MAGENTA_PICNIC_BASKET = ITEMS.register("magenta_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.MAGENTA_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> LIGHT_BLUE_PICNIC_BASKET = ITEMS.register("light_blue_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.LIGHT_BLUE_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> YELLOW_PICNIC_BASKET = ITEMS.register("yellow_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.YELLOW_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> LIME_PICNIC_BASKET = ITEMS.register("lime_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.LIME_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> PINK_PICNIC_BASKET = ITEMS.register("pink_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.PINK_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> GRAY_PICNIC_BASKET = ITEMS.register("gray_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.GRAY_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> LIGHT_GRAY_PICNIC_BASKET = ITEMS.register("light_gray_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.LIGHT_GRAY_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> CYAN_PICNIC_BASKET = ITEMS.register("cyan_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.CYAN_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> BLUE_PICNIC_BASKET = ITEMS.register("blue_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.BLUE_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> BROWN_PICNIC_BASKET = ITEMS.register("brown_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.BROWN_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> GREEN_PICNIC_BASKET = ITEMS.register("green_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.GREEN_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> RED_PICNIC_BASKET = ITEMS.register("red_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.RED_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> BLACK_PICNIC_BASKET = ITEMS.register("black_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.BLACK_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> PURPLE_PICNIC_BASKET = ITEMS.register("purple_picnic_basket", () -> new BlockItem(ExtraDelightBlocks.PURPLE_PICNIC_BASKET.get(), new Item.Properties().stacksTo(1)));
 
 	public static final RegistryObject<Item> EVAPORATOR = ITEMS.register("evaporator",
 			() -> new BlockItem(ExtraDelightBlocks.EVAPORATOR.get(),
