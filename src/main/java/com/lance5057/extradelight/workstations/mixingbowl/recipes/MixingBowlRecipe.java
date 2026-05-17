@@ -7,7 +7,7 @@ import com.lance5057.extradelight.util.StackUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-//import com.simibubi.create.foundation.fluid.FluidIngredient;
+//import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -293,7 +293,7 @@ public class MixingBowlRecipe implements Recipe<MixingBowlRecipeWrapper> {
 //
 //			pBuffer.writeVarInt(pRecipe.getFluids().size());
 //
-//			for (SizedFluidIngredient f : pRecipe.getFluids()) {
+//			for (SizedFluidIngredientCompat f : pRecipe.getFluids()) {
 //				SizedFluidIngredient.STREAM_CODEC.encode(pBuffer, f);
 //			}
 //

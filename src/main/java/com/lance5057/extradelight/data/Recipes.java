@@ -9,9 +9,10 @@ import com.lance5057.extradelight.workstations.doughshaping.recipes.DoughShaping
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.Create;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraftforge.fml.ModList;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -116,7 +117,7 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 
 	private void vatRecipes(Consumer<FinishedRecipe> consumer) {
 //		VatRecipeBuilder.pickle(new ItemStack(Items.DIAMOND), new ItemStack(Items.DIRT), 100)
-//				.requires(Ingredient.of(Tags.Items.BONES)).requiresFluid(FluidIngredient.fromFluidStack(Fluids.LAVA, 1000))
+//				.requires(Ingredient.of(Tags.Items.BONES)).requiresFluid(FluidIngredientCompat.fromFluidStack(Fluids.LAVA, 1000))
 //				.requiresStage(new StageIngredient(Ingredient.of(Tags.Items.BRICKS), 1000, false))
 //				.requiresStage(new StageIngredient(Ingredient.of(Tags.Items.EGGS), 100, true)).save(consumer);
 	}
@@ -135,10 +136,12 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
                 new ItemStack(ExtraDelightItems.BAR_MOLD.get()),
                 new FluidStack(ExtraDelightFluids.BLOOD_CHOCOLATE_SYRUP.FLUID.get(), 250)).build(consumer);
 
-        ChillerRecipeBuilder.chill(AllItems.BAR_OF_CHOCOLATE.asStack(), FAST_COOKING, SMALL_EXP,
-                        new ItemStack(ExtraDelightItems.BAR_MOLD.get()), new FluidStack(AllFluids.CHOCOLATE.getSource().getSource(), 250))
-                .build(consumer);//, "milk_chocolate_bar_create";);
-                // .withConditions(new ModLoadedCondition("create")
+        if (ModList.get().isLoaded("create")) {
+            ChillerRecipeBuilder.chill(AllItems.BAR_OF_CHOCOLATE.asStack(), FAST_COOKING, SMALL_EXP,
+                            new ItemStack(ExtraDelightItems.BAR_MOLD.get()), new FluidStack(AllFluids.CHOCOLATE.getSource().getSource(), 250))
+                    .build(consumer);//, "milk_chocolate_bar_create";);
+                    // .withConditions(new ModLoadedCondition("create")
+        }
 
 
         ChillerRecipeBuilder
@@ -1587,68 +1590,68 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 		mixing(new ItemStack(ModItems.WHEAT_DOUGH.get(), 3), LONG_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.FLOUR),
 						Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(Tags.Items.EGGS) },
-				new FluidIngredient[] {}, consumer, "wheat_dough_egg");
+				new FluidIngredientCompat[] {}, consumer, "wheat_dough_egg");
 
 		mixing(new ItemStack(ModItems.WHEAT_DOUGH.get(), 3), LONG_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.FLOUR),
 						Ingredient.of(ExtraDelightTags.FLOUR) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(Fluids.WATER, 1000)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(Fluids.WATER, 1000)) }, consumer,
 				"wheat_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.EGG_MIX.get(), 1), LONG_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(Tags.Items.EGGS), Ingredient.of(Tags.Items.EGGS) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"egg_mix");
 
 		mixing(new ItemStack(ExtraDelightItems.MAYO.get(), 1), LONG_GRIND, new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(Tags.Items.EGGS), Ingredient.of(Tags.Items.EGGS) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
 				consumer, "mayo");
 
 		mixing(new ItemStack(ExtraDelightItems.CARROT_SALAD.get(), 1), LONG_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.GRATED_CARROT),
 						Ingredient.of(ExtraDelightTags.GRATED_CARROT),
 						Ingredient.of(ExtraDelightTags.PROCESSED_APPLE) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
 				consumer, "carrot_salad");
 
 		mixing(new ItemStack(ExtraDelightItems.EGG_SALAD.get(), 1), LONG_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.BOILED_EGG),
 						Ingredient.of(ExtraDelightTags.BOILED_EGG) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
 				consumer, "egg_salad");
 
 		mixing(new ItemStack(ExtraDelightItems.FISH_SALAD.get(), 2), LONG_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ForgeTags.COOKED_FISHES),
 						Ingredient.of(ForgeTags.COOKED_FISHES) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
 				consumer, "fish_salad");
 
 		mixing(new ItemStack(ExtraDelightItems.BUTTER.get(), 1), LONG_GRIND, ItemStack.EMPTY, new Ingredient[] {},
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "butter");
 
 		mixing(new ItemStack(ExtraDelightItems.WHIPPED_CREAM.get(), 1), LONG_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] {},
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"whipped_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.SEAWEED_SALAD.get(), 2), STANDARD_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(Items.KELP), Ingredient.of(Items.KELP),
 						Ingredient.of(ExtraDelightTags.GRATED_CARROT) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
 				consumer, "seaweed_salad");
 
 		mixing(new ItemStack(ExtraDelightItems.FURIKAKE.get(), 4), STANDARD_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(Items.KELP), Ingredient.of(Items.KELP),
 						Ingredient.of(ExtraDelightTags.FISH_FLAKES), Ingredient.of(ExtraDelightTags.FISH_FLAKES) },
-				new FluidIngredient[] {}, consumer, "furikake_rice_mixing");
+				new FluidIngredientCompat[] {}, consumer, "furikake_rice_mixing");
 
 		mixing(new ItemStack(ExtraDelightItems.SALAD_FEAST_ITEM.get(), 1), STANDARD_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.PROCESSED_CABBAGE),
@@ -1656,8 +1659,8 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 						Ingredient.of(ExtraDelightTags.PROCESSED_CARROT), Ingredient.of(ExtraDelightTags.CROUTONS),
 						Ingredient.of(ExtraDelightTags.CHEESE), Ingredient.of(ExtraDelightTags.BOILED_EGG),
 						Ingredient.of(ExtraDelightTags.MEAT_COOKED) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
 				consumer, "salad_meat");
 
 		mixing(new ItemStack(ExtraDelightItems.SALAD_FEAST_ITEM.get(), 1), STANDARD_GRIND, new ItemStack(Items.BOWL),
@@ -1666,52 +1669,52 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 						Ingredient.of(ExtraDelightTags.PROCESSED_CARROT),
 						Ingredient.of(ExtraDelightItems.CROUTONS.get()), Ingredient.of(ExtraDelightTags.CHEESE),
 						Ingredient.of(ExtraDelightTags.BOILED_EGG), Ingredient.of(ExtraDelightTags.PROCESSED_VEG) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
 				consumer, "salad_veg");
 
 		mixing(new ItemStack(ExtraDelightItems.PASTA_ALFREDO.get(), 1), FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.ALFREDO_SAUCE),
 						Ingredient.of(ExtraDelightItems.COOKED_PASTA.get()) },
-				new FluidIngredient[] {}, consumer, "pasta_alfredo");
+				new FluidIngredientCompat[] {}, consumer, "pasta_alfredo");
 
 		mixing(new ItemStack(ExtraDelightItems.CHICKEN_ALFREDO.get(), 1), FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.ALFREDO_SAUCE),
 						Ingredient.of(ExtraDelightItems.COOKED_PASTA.get()),
 						Ingredient.of(ForgeTags.COOKED_CHICKEN) },
-				new FluidIngredient[] {}, consumer, "chicken_alfredo");
+				new FluidIngredientCompat[] {}, consumer, "chicken_alfredo");
 
 		mixing(new ItemStack(ExtraDelightItems.PASTA_TOMATO.get(), 1), FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ModItems.TOMATO_SAUCE.get()),
 						Ingredient.of(ExtraDelightItems.COOKED_PASTA.get()) },
-				new FluidIngredient[] {}, consumer, "pasta_tomato");
+				new FluidIngredientCompat[] {}, consumer, "pasta_tomato");
 
 		mixing(new ItemStack(ModItems.PASTA_WITH_MEATBALLS.get(), 1), FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ModItems.TOMATO_SAUCE.get()),
 						Ingredient.of(ExtraDelightItems.COOKED_PASTA.get()), Ingredient.of(ModItems.BEEF_PATTY.get()) },
-				new FluidIngredient[] {}, consumer, "pasta_meatballs");
+				new FluidIngredientCompat[] {}, consumer, "pasta_meatballs");
 
 		mixing(new ItemStack(ModItems.PASTA_WITH_MUTTON_CHOP.get(), 1), FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ModItems.TOMATO_SAUCE.get()),
 						Ingredient.of(ExtraDelightItems.COOKED_PASTA.get()), Ingredient.of(Items.COOKED_MUTTON) },
-				new FluidIngredient[] {}, consumer, "pasta_mutton");
+				new FluidIngredientCompat[] {}, consumer, "pasta_mutton");
 
 		mixing(new ItemStack(ExtraDelightItems.BUTTERED_PASTA.get(), 1), FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.COOKED_PASTA.get()),
 						Ingredient.of(ExtraDelightTags.BUTTER) },
-				new FluidIngredient[] {}, consumer, "buttered_pasta");
+				new FluidIngredientCompat[] {}, consumer, "buttered_pasta");
 
 		mixing(new ItemStack(ExtraDelightItems.CACTUS_SALAD.get(), 1), FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.COOKED_CACTUS),
 						Ingredient.of(ExtraDelightTags.PROCESSED_TOMATO),
 						Ingredient.of(ExtraDelightTags.PROCESSED_ONION), Ingredient.of(ExtraDelightTags.CHEESE) },
-				new FluidIngredient[] {}, consumer, "cactus_salad");
+				new FluidIngredientCompat[] {}, consumer, "cactus_salad");
 
 		// Holiday
 
 		mixing(new ItemStack(ExtraDelightItems.MILKSHAKE.get(), 1), STANDARD_GRIND, new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.APPLE_MILKSHAKE.get(), 1), STANDARD_GRIND,
@@ -1720,52 +1723,52 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 						Ingredient.of(ExtraDelightTags.PROCESSED_APPLE),
 						Ingredient.of(ExtraDelightTags.PROCESSED_APPLE),
 						Ingredient.of(ExtraDelightTags.PROCESSED_APPLE) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"apple_milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.APPLE_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.APPLE_ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"apple_milkshake_ice_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.CHOCOLATE_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.ICE_CREAM.get()),
 						Ingredient.of(ExtraDelightTags.COCOA_POWDER) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"chocolate_milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.CHOCOLATE_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.CHOCOLATE_ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"chocolate_milkshake_ice_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.GLOW_BERRY_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.ICE_CREAM.get()), Ingredient.of(Items.GLOW_BERRIES),
 						Ingredient.of(Items.GLOW_BERRIES), Ingredient.of(Items.GLOW_BERRIES), },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"glow_berry_milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.GLOW_BERRY_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.GLOW_BERRY_ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"glow_berry_milkshake_ice_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.HONEY_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.ICE_CREAM.get()), Ingredient.of(Items.HONEY_BOTTLE),
 						Ingredient.of(Items.HONEY_BOTTLE), Ingredient.of(Items.HONEY_BOTTLE), },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"honey_milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.HONEY_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.HONEY_ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"honey_milkshake_ice_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.PUMPKIN_MILKSHAKE.get(), 1), STANDARD_GRIND,
@@ -1773,320 +1776,320 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.ICE_CREAM.get()),
 						Ingredient.of(ModItems.PUMPKIN_SLICE.get()), Ingredient.of(ModItems.PUMPKIN_SLICE.get()),
 						Ingredient.of(ModItems.PUMPKIN_SLICE.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"pumpkin_milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.PUMPKIN_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.PUMPKIN_ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"pumpkin_milkshake_ice_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.SWEET_BERRY_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.ICE_CREAM.get()), Ingredient.of(Items.SWEET_BERRIES),
 						Ingredient.of(Items.SWEET_BERRIES), Ingredient.of(Items.SWEET_BERRIES), },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"sweet_berry_milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.SWEET_BERRY_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.SWEET_BERRY_ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"sweet_berry_milkshake_ice_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.COOKIE_DOUGH_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.ICE_CREAM.get()),
 						Ingredient.of(ExtraDelightTags.COOKIE_DOUGH) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"cookie_dough_milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.COOKIE_DOUGH_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.COOKIE_DOUGH_ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"cookie_dough_milkshake_ice_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.MINT_CHIP_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.ICE_CREAM.get()),
 						Ingredient.of(ExtraDelightTags.CHOCOLATE_CHIPS), Ingredient.of(ExtraDelightTags.MINT) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"mint_chip_milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.MINT_CHIP_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.MINT_CHIP_ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"mint_chip_milkshake_ice_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.SUGAR_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS) },
-				new FluidIngredient[] {}, consumer, "sugar_cookie_dough");
+				new FluidIngredientCompat[] {}, consumer, "sugar_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.APPLE_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(ExtraDelightTags.PROCESSED_APPLE),
 						Ingredient.of(ExtraDelightTags.GROUND_CINNAMON) },
-				new FluidIngredient[] {}, consumer, "apple_cookie_dough");
+				new FluidIngredientCompat[] {}, consumer, "apple_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.APPLE_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SUGAR_COOKIE_DOUGH),
 						Ingredient.of(ExtraDelightTags.PROCESSED_APPLE),
 						Ingredient.of(ExtraDelightTags.GROUND_CINNAMON) },
-				new FluidIngredient[] {}, consumer, "apple_cookie_dough_sugar");
+				new FluidIngredientCompat[] {}, consumer, "apple_cookie_dough_sugar");
 
 		mixing(new ItemStack(ExtraDelightItems.CHOCOLATE_CHIP_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(ExtraDelightTags.CHOCOLATE_CHIPS) },
-				new FluidIngredient[] {}, consumer, "chocolate_chip_cookie_dough");
+				new FluidIngredientCompat[] {}, consumer, "chocolate_chip_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.CHOCOLATE_CHIP_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SUGAR_COOKIE_DOUGH),
 						Ingredient.of(ExtraDelightTags.CHOCOLATE_CHIPS) },
-				new FluidIngredient[] {}, consumer, "chocolate_chip_cookie_dough_sugar");
+				new FluidIngredientCompat[] {}, consumer, "chocolate_chip_cookie_dough_sugar");
 
 		mixing(new ItemStack(ExtraDelightItems.GINGERBREAD_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(ExtraDelightItems.GRATED_GINGER.get()),
 						Ingredient.of(ExtraDelightTags.GROUND_CINNAMON) },
-				new FluidIngredient[] {}, consumer, "gingerbread_cookie_dough");
+				new FluidIngredientCompat[] {}, consumer, "gingerbread_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.GINGERBREAD_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SUGAR_COOKIE_DOUGH),
 						Ingredient.of(ExtraDelightItems.GRATED_GINGER.get()),
 						Ingredient.of(ExtraDelightTags.GROUND_CINNAMON) },
-				new FluidIngredient[] {}, consumer, "gingerbread_cookie_dough_sugar");
+				new FluidIngredientCompat[] {}, consumer, "gingerbread_cookie_dough_sugar");
 
 		mixing(new ItemStack(ExtraDelightItems.GLOW_BERRY_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(Items.GLOW_BERRIES) },
-				new FluidIngredient[] {}, consumer, "glow_berry_cookie_dough");
+				new FluidIngredientCompat[] {}, consumer, "glow_berry_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.GLOW_BERRY_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SUGAR_COOKIE_DOUGH),
 						Ingredient.of(Items.GLOW_BERRIES) },
-				new FluidIngredient[] {}, consumer, "glow_berry_cookie_dough_sugar");
+				new FluidIngredientCompat[] {}, consumer, "glow_berry_cookie_dough_sugar");
 
 		mixing(new ItemStack(ExtraDelightItems.HONEY_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(Items.HONEY_BOTTLE) },
-				new FluidIngredient[] {}, consumer, "honey_cookie_dough");
+				new FluidIngredientCompat[] {}, consumer, "honey_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.HONEY_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SUGAR_COOKIE_DOUGH),
 						Ingredient.of(Items.HONEY_BOTTLE) },
-				new FluidIngredient[] {}, consumer, "honey_cookie_dough_sugar");
+				new FluidIngredientCompat[] {}, consumer, "honey_cookie_dough_sugar");
 
 		mixing(new ItemStack(ExtraDelightItems.PUMPKIN_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(ModItems.PUMPKIN_SLICE.get()) },
-				new FluidIngredient[] {}, consumer, "pumpkin_cookie_dough");
+				new FluidIngredientCompat[] {}, consumer, "pumpkin_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.PUMPKIN_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SUGAR_COOKIE_DOUGH),
 						Ingredient.of(ModItems.PUMPKIN_SLICE.get()) },
-				new FluidIngredient[] {}, consumer, "pumpkin_cookie_dough_sugar");
+				new FluidIngredientCompat[] {}, consumer, "pumpkin_cookie_dough_sugar");
 
 		mixing(new ItemStack(ExtraDelightItems.SWEET_BERRY_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(Items.SWEET_BERRIES) },
-				new FluidIngredient[] {}, consumer, "sweet_berry_cookie_dough");
+				new FluidIngredientCompat[] {}, consumer, "sweet_berry_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.SWEET_BERRY_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SUGAR_COOKIE_DOUGH),
 						Ingredient.of(Items.SWEET_BERRIES) },
-				new FluidIngredient[] {}, consumer, "sweet_berry_cookie_dough_sugar");
+				new FluidIngredientCompat[] {}, consumer, "sweet_berry_cookie_dough_sugar");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_BLACK.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_BLACK) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_black");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_BLUE.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_BLUE) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_blue");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_BROWN.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_BROWN) },
-				new FluidIngredient[] {
+				new FluidIngredientCompat[] {
 
 				}, consumer, "frosting_brown");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_CYAN.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_CYAN) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_cyan");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_GRAY.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_GRAY) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_gray");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_GREEN.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_GREEN) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_green");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_LIGHT_BLUE.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_LIGHT_BLUE) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_light_blue");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_LIGHT_GRAY.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_LIGHT_GRAY) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_light_gray");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_LIME.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_LIME) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_lime");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_MAGENTA.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_MAGENTA) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_magenta");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_ORANGE.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_ORANGE) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_orange");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_PINK.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_PINK) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_pink");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_PURPLE.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_PURPLE) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_purple");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_RED.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_RED) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_red");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_WHITE.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_WHITE) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_white");
 
 		mixing(new ItemStack(ExtraDelightItems.FROSTING_YELLOW.get(), 4), FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.BUTTER.get()),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(Tags.Items.DYES_YELLOW) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "frosting_yellow");
 
 		mixing(new ItemStack(ExtraDelightItems.BEET_MINT_SALAD.get(), 2), STANDARD_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.PROCESSED_BEETROOT),
 						Ingredient.of(ExtraDelightTags.PROCESSED_BEETROOT), Ingredient.of(ExtraDelightTags.MINT),
 						Ingredient.of(ExtraDelightTags.SWEETENER) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
 				consumer, "beet_mint_salad");
 
 		mixing(new ItemStack(ExtraDelightItems.COFFEE_JELLY.get(), 2), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.GELATIN), Ingredient.of(ExtraDelightTags.SWEETENER) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.COFFEE.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.COFFEE.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)) },
 				consumer, "coffee_jelly");
 
 		mixing(new ItemStack(ExtraDelightItems.MARSHMALLOW.get(), 4), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.MALLOWROOT_POWDER),
 						Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(Tags.Items.EGGS) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(Fluids.WATER, 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(Fluids.WATER, 250)) }, consumer,
 				"marshmallow");
 
 		mixing(new ItemStack(ExtraDelightItems.NOUGAT.get(), 4), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(ExtraDelightTags.ROASTED_NUTS) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(Fluids.WATER, 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(Fluids.WATER, 250)) }, consumer,
 				"nougat");
 
 		mixing(new ItemStack(ExtraDelightItems.GUMMIES.get(), 4), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SWEETENER), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.GELATIN), Ingredient.of(ExtraDelightTags.GELATIN),
 						Ingredient.of(Tags.Items.DYES), Ingredient.of(Tags.Items.DYES) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(Fluids.WATER, 100)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(Fluids.WATER, 100)) }, consumer,
 				"gummies");
 
 		mixing(new ItemStack(ExtraDelightItems.WHITE_CHOCOLATE_SYRUP_BOTTLE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE), new Ingredient[] { Ingredient.of(ExtraDelightTags.SWEETENER) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.COCOA_BUTTER.FLUID.get(), 100)),
-						FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 100)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.COCOA_BUTTER.FLUID.get(), 100)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 100)) },
 				consumer, "white_chocolate");
 
 		mixing(new ItemStack(ExtraDelightItems.MILK_CHOCOLATE_SYRUP_BOTTLE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.COCOA_SOLIDS) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.COCOA_BUTTER.FLUID.get(), 100)),
-						FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 50)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.COCOA_BUTTER.FLUID.get(), 100)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 50)) },
 				consumer, "milk_chocolate");
 
 		mixing(new ItemStack(ExtraDelightItems.DARK_CHOCOLATE_SYRUP_BOTTLE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.COCOA_SOLIDS), Ingredient.of(ExtraDelightTags.COCOA_SOLIDS) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.COCOA_BUTTER.FLUID.get(), 100)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.COCOA_BUTTER.FLUID.get(), 100)) },
 				consumer, "dark_chocolate");
 
 		mixing(new ItemStack(ExtraDelightItems.BLOOD_CHOCOLATE_SYRUP_BOTTLE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.COCOA_SOLIDS) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.COCOA_BUTTER.FLUID.get(), 100)),
-						FluidIngredient.fromTag(ExtraDelightTags.BLOOD, 50) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.COCOA_BUTTER.FLUID.get(), 100)),
+						FluidIngredientCompat.fromTag(ExtraDelightTags.BLOOD, 50) },
 				consumer, "blood_chocolate");
 
 		mixing(new ItemStack(ExtraDelightItems.PULLED_PORK_FEAST_ITEM.get(), 1), STANDARD_GRIND,
@@ -2095,108 +2098,108 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 						Ingredient.of(ExtraDelightTags.SCRAP_PORK_COOKED),
 						Ingredient.of(ExtraDelightTags.SCRAP_PORK_COOKED),
 						Ingredient.of(ExtraDelightTags.SCRAP_PORK_COOKED) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.BBQ.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.BBQ.FLUID.get(), 250)) },
 				consumer, "pulled_pork");
 
 		mixing(new ItemStack(ExtraDelightItems.HAZELNUT_SPREAD_BOTTLE.get(), 2), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE), new Ingredient[] { Ingredient.of(ExtraDelightTags.SWEETENER) },
-				new FluidIngredient[] { FluidIngredient.fromTag(ExtraDelightTags.CHOCOLATE_FLUID, 250),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.NUT_BUTTER.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromTag(ExtraDelightTags.CHOCOLATE_FLUID, 250),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.NUT_BUTTER.FLUID.get(), 250)) },
 				consumer, "hazelnut_spread");
 
 		mixing(new ItemStack(ExtraDelightItems.APPLE_SLAW.get(), 1), STANDARD_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.PROCESSED_CABBAGE),
 						Ingredient.of(ExtraDelightTags.SLICED_APPLE) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
 				consumer, "apple_slaw");
 
 		mixing(new ItemStack(ExtraDelightItems.CANDY_BAR_SALAD.get(), 1), STANDARD_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.CHOCOLATE_BAR),
 						Ingredient.of(ExtraDelightTags.SLICED_APPLE), Ingredient.of(ExtraDelightTags.CUSTARD),
 						Ingredient.of(ExtraDelightTags.MARSHMALLOW) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.CARAMEL_SAUCE.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.WHIPPED_CREAM.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.CARAMEL_SAUCE.FLUID.get(), 250)) },
 				consumer, "candy_bar_salad");
 
 		mixing(new ItemStack(ExtraDelightItems.NUT_BUTTER_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.NUT_BUTTER.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.NUT_BUTTER.FLUID.get(), 250)) },
 				consumer, "nut_butter_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.NUT_BUTTER_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SUGAR_COOKIE_DOUGH) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.NUT_BUTTER.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.NUT_BUTTER.FLUID.get(), 250)) },
 				consumer, "nut_butter_cookie_dough_sugar");
 
 		mixing(new ItemStack(ExtraDelightItems.NUT_BUTTER_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.ICE_CREAM.get()) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.NUT_BUTTER.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.NUT_BUTTER.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) },
 				consumer, "nut_butter_milkshake");
 
 		mixing(new ItemStack(ExtraDelightItems.NUT_BUTTER_MILKSHAKE.get(), 1), STANDARD_GRIND,
 				new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.NUT_BUTTER_ICE_CREAM.get()) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ForgeMod.MILK.get(), 250)) }, consumer,
 				"nut_butter_milkshake_ice_cream");
 
 		mixing(new ItemStack(ExtraDelightItems.CHOCOLATE_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.FLOUR), Ingredient.of(ExtraDelightTags.SWEETENER),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(ExtraDelightTags.COCOA_POWDER) },
-				new FluidIngredient[] {}, consumer, "chocolate_cookie_dough");
+				new FluidIngredientCompat[] {}, consumer, "chocolate_cookie_dough");
 
 		mixing(new ItemStack(ExtraDelightItems.CHOCOLATE_COOKIE_DOUGH.get(), 1), STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.SUGAR_COOKIE_DOUGH),
 						Ingredient.of(ExtraDelightTags.COCOA_POWDER) },
-				new FluidIngredient[] {}, consumer, "chocolate_cookie_dough_sugar");
+				new FluidIngredientCompat[] {}, consumer, "chocolate_cookie_dough_sugar");
 
 		mixing(new ItemStack(ExtraDelightItems.POTATO_SALAD.get(), 2), LONG_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(Items.BAKED_POTATO), Ingredient.of(Items.BAKED_POTATO),
 						Ingredient.of(ExtraDelightTags.PROCESSED_ONION) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
 				consumer, "potato_salad");
 
 		mixing(new ItemStack(ExtraDelightItems.AIOLI.get(), 1), LONG_GRIND, new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(Tags.Items.EGGS), Ingredient.of(Tags.Items.EGGS),
 						Ingredient.of(ExtraDelightTags.PROCESSED_GARLIC) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)) },
 				consumer, "aioli_from_scratch");
 
 		mixing(new ItemStack(ExtraDelightItems.AIOLI.get(), 1), LONG_GRIND, new ItemStack(Items.GLASS_BOTTLE),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.PROCESSED_GARLIC) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.MAYO.FLUID.get(), 250)) },
 				consumer, "aioli_cheaty");
 
 		mixing(new ItemStack(ExtraDelightItems.AGLIO_E_OLIO.get(), 1), FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightItems.COOKED_PASTA.get()),
 						Ingredient.of(ExtraDelightItems.ROASTED_GARLIC.get()),
 						Ingredient.of(ExtraDelightTags.PROCESSED_CHILI), Ingredient.of(ExtraDelightTags.CHEESE) },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)) },
 				consumer, "aglio_e_olio_mixing");
 	}
 
 	public static void mixing(@Nonnull ItemStack output, int grind, ItemStack container, Ingredient[] ingredients,
-			FluidIngredient[] FluidIngredients, Consumer<FinishedRecipe> consumer, String rc) {
+			FluidIngredientCompat[] FluidIngredients, Consumer<FinishedRecipe> consumer, String rc) {
 		MixingBowlRecipeBuilder b = MixingBowlRecipeBuilder.stir(output, grind, container);
 
 		for (Ingredient i : ingredients)
 			b.requires(i);
-		for (FluidIngredient f : FluidIngredients)
+		for (FluidIngredientCompat f : FluidIngredients)
 			b.requires(f);
 
 		b.unlockedBy(rc, has(output.getItem()));
@@ -2215,7 +2218,7 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 //			p.require(container.getItem());
 //
 //		boolean flag = true;
-//		for (FluidIngredient f : FluidIngredients)
+//		for (FluidIngredientCompat f : FluidIngredients)
 //			if (f.getFluids() != null && f.getFluids().length > 0)
 //				p.require(f.getFluids()[0].getFluid(), f.amount());
 //			else

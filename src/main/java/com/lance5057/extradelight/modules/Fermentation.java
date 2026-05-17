@@ -20,7 +20,7 @@ import com.lance5057.extradelight.food.EDFoods;
 import com.lance5057.extradelight.items.ToolTipConsumableItem;
 import com.lance5057.extradelight.util.EDItemGenerator;
 import com.lance5057.extradelight.workstations.vat.recipes.VatRecipe.StageIngredient;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 //import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -750,43 +750,43 @@ public class Fermentation {
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.PROCESSED_TOMATO),
 						Ingredient.of(ExtraDelightTags.PROCESSED_CUCUMBER),
 						Ingredient.of(ExtraDelightTags.BREAD_CRUMBS) },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
 				consumer, "gazpacho_mixing");
 
 		Recipes.mixing(new ItemStack(SHIRAZI_SALAD.get(), 1), Recipes.FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.PROCESSED_TOMATO),
 						Ingredient.of(ExtraDelightTags.PROCESSED_CUCUMBER),
 						Ingredient.of(ExtraDelightTags.PROCESSED_ONION), Ingredient.of(ExtraDelightTags.MINT), },
-				new FluidIngredient[] {
-						FluidIngredient.fromFluid(ExtraDelightFluids.OIL.FLUID.get(), 250) },
+				new FluidIngredientCompat[] {
+						FluidIngredientCompat.fromFluid(ExtraDelightFluids.OIL.FLUID.get(), 250) },
 				consumer, "shirazi_salad_mixing");
 
 		Recipes.mixing(new ItemStack(CUCUMBER_SALAD.get(), 2), Recipes.FAST_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.PROCESSED_CUCUMBER),
 						Ingredient.of(ExtraDelightTags.PROCESSED_GARLIC),
 						Ingredient.of(ExtraDelightTags.PROCESSED_GINGER), Ingredient.of(ExtraDelightTags.SOY_SAUCE), },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
 				consumer, "cucumber_salad_mixing");
 
 		Recipes.mixing(new ItemStack(MORKOVCHA.get(), 3), Recipes.LONG_GRIND, new ItemStack(Items.BOWL),
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.PROCESSED_CARROT),
 						Ingredient.of(ExtraDelightTags.PROCESSED_GARLIC), Ingredient.of(ExtraDelightTags.CHILI_POWDER),
 						Ingredient.of(ExtraDelightTags.SALT), },
-				new FluidIngredient[] { FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
-						FluidIngredient.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
+				new FluidIngredientCompat[] { FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.OIL.FLUID.get(), 250)),
+						FluidIngredientCompat.fromFluidStack(new FluidStack(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) },
 				consumer, "morkovcha_mixing");
 
 		Recipes.mixing(new ItemStack(HOT_WINGS.get(), 1), Recipes.FAST_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.CHICKEN_WING_COOKED),
 						Ingredient.of(ExtraDelightTags.BUTTER), Ingredient.of(ExtraDelightTags.HOT_SAUCE) },
-				new FluidIngredient[] {}, consumer, "hot_wings_mixing");
+				new FluidIngredientCompat[] {}, consumer, "hot_wings_mixing");
 
 		Recipes.mixing(new ItemStack(SALAMI_MIX.get(), 8), Recipes.STANDARD_GRIND, ItemStack.EMPTY,
 				new Ingredient[] { Ingredient.of(ExtraDelightTags.GROUND_BEEF), Ingredient.of(ExtraDelightTags.FAT),
 						Ingredient.of(ExtraDelightTags.PROCESSED_GARLIC) },
-				new FluidIngredient[] {}, consumer, "salami_mix");
+				new FluidIngredientCompat[] {}, consumer, "salami_mix");
 
 		// Mortar
 		MortarRecipeBuilder
@@ -914,7 +914,7 @@ public class Fermentation {
 		VatRecipeBuilder.pickle(new ItemStack(GHERKINS_BLOCK_ITEM.get()), new ItemStack(Items.GLASS_BOTTLE))
 				.requires(Ingredient.of(ExtraDelightTags.CUCUMBER)).requires(Ingredient.of(ExtraDelightTags.CUCUMBER))
 				.requires(Ingredient.of(ExtraDelightTags.CUCUMBER)).requires(Ingredient.of(ExtraDelightTags.CUCUMBER))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), (int) (dayTick), false))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, (int) (dayTick * 7), true)).save(consumer);
 
@@ -923,21 +923,21 @@ public class Fermentation {
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_BEETROOT))
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_BEETROOT))
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_BEETROOT)).requires(Ingredient.of(Items.SUGAR))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) // fluid
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250)) // fluid
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick * 7, true))
 				.save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(PICKLED_ONIONS_BLOCK_ITEM.get()), new ItemStack(Items.GLASS_BOTTLE))
 				.requires(Ingredient.of(ForgeTags.CROPS_ONION)).requires(Ingredient.of(ForgeTags.CROPS_ONION))
 				.requires(Ingredient.of(ForgeTags.CROPS_ONION)).requires(Ingredient.of(ForgeTags.CROPS_ONION))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick, false))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, true)).save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(PICKLED_CARROTS_BLOCK_ITEM.get()), new ItemStack(Items.GLASS_BOTTLE))
 				.requires(Ingredient.of(Tags.Items.CROPS_CARROT)).requires(Ingredient.of(Tags.Items.CROPS_CARROT))
 				.requires(Ingredient.of(Tags.Items.CROPS_CARROT)).requires(Ingredient.of(Tags.Items.CROPS_CARROT))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, true))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick * 3, true))
 				.save(consumer);
@@ -947,7 +947,7 @@ public class Fermentation {
 				.requires(Ingredient.of(ExtraDelightTags.BOILED_EGG))
 				.requires(Ingredient.of(ExtraDelightTags.BOILED_EGG))
 				.requires(Ingredient.of(ExtraDelightTags.BOILED_EGG)).requires(Ingredient.of(Items.SUGAR))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, true)).save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(PICKLED_FISH_BLOCK_ITEM.get()), new ItemStack(Items.GLASS_BOTTLE))
@@ -955,7 +955,7 @@ public class Fermentation {
 				.requires(Ingredient.of(ForgeTags.RAW_FISHES))
 				.requires(Ingredient.of(ForgeTags.RAW_FISHES))
 				.requires(Ingredient.of(ForgeTags.RAW_FISHES)).requires(Ingredient.of(Items.SUGAR))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick, false))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, true)).save(consumer);
 
@@ -964,7 +964,7 @@ public class Fermentation {
 				.requires(Ingredient.of(ExtraDelightTags.SAUSAGE_COOKED))
 				.requires(Ingredient.of(ExtraDelightTags.SAUSAGE_COOKED))
 				.requires(Ingredient.of(ExtraDelightTags.SAUSAGE_COOKED))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, true)).save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(PICKLED_GINGER_BLOCK_ITEM.get()), new ItemStack(Items.GLASS_BOTTLE))
@@ -972,26 +972,26 @@ public class Fermentation {
 				.requires(Ingredient.of(ExtraDelightTags.SLICED_GINGER))
 				.requires(Ingredient.of(ExtraDelightTags.SLICED_GINGER))
 				.requires(Ingredient.of(ExtraDelightTags.SLICED_GINGER))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), hourTick, false))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, true)).save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(SOAKED_SOYBEANS_ITEM.get()), new ItemStack(Items.BOWL))
 				.requires(Ingredient.of(ExtraDelightTags.SOYBEAN))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 1000)) // fluid
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 1000)) // fluid
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick, true)).save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(SOY_SAUCE_ITEM.get()), new ItemStack(Items.GLASS_BOTTLE))
 				.requires(Ingredient.of(ExtraDelightTags.COOKED_SOYBEANS))
 				.requires(Ingredient.of(ExtraDelightTags.COOKED_WHEAT_SEEDS))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightItems.YEAST.get()), dayTick * 3, true))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick * 14, true)).save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(SAUERKRAUT_ITEM.get(), 2), new ItemStack(Items.BOWL, 2))
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_CABBAGE))
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_CABBAGE))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), hourTick, false))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, true)).save(consumer);
 
@@ -999,7 +999,7 @@ public class Fermentation {
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_CHILI))
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_GARLIC))
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_ONION))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.VINEGAR.FLUID.get(), 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick, false))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, true)).save(consumer);
 
@@ -1009,7 +1009,7 @@ public class Fermentation {
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_GINGER))
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_GARLIC))
 				.requires(Ingredient.of(ExtraDelightTags.CHILI_POWDER))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), hourTick * 7, false))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, true)).save(consumer);
 
@@ -1020,20 +1020,20 @@ public class Fermentation {
 				.requires(Ingredient.of(ModItems.COOKED_RICE.get()))
 				.requires(Ingredient.of(ExtraDelightTags.COOKED_SOYBEANS))
 				.requires(Ingredient.of(ModItems.COOKED_RICE.get()))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick * 2, false))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightItems.YEAST.get()), dayTick * 14, true))
 				.save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(NATTO_ITEM.get()), new ItemStack(Items.BOWL))
 				.requires(Ingredient.of(ExtraDelightTags.COOKED_SOYBEANS))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightItems.YEAST.get()), dayTick * 3, true))
 				.save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(FISH_SAUCE_ITEM.get()), new ItemStack(Items.GLASS_BOTTLE))
 				.requires(Ingredient.of(ForgeTags.RAW_FISHES))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick * 14, true))
 				.save(consumer);
 
@@ -1043,7 +1043,7 @@ public class Fermentation {
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_GARLIC))
 				.requires(Ingredient.of(ModItems.COOKED_RICE.get()))
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_CHILI))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick * 5, true))
 				.save(consumer);
 
@@ -1053,7 +1053,7 @@ public class Fermentation {
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_GARLIC))
 				.requires(Ingredient.of(ModItems.COOKED_RICE.get()))
 				.requires(Ingredient.of(ExtraDelightTags.PROCESSED_CHILI))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 250))
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 250))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightTags.SALT), dayTick * 5, true))
 				.save(consumer, "naem_moo_but_with_dripleaf");
 
@@ -1061,20 +1061,20 @@ public class Fermentation {
 				.requires(CompoundIngredient.of(Ingredient.of(ExtraDelightTags.FRUIT),
 						Ingredient.of(Items.SUGAR_CANE), Ingredient.of(Items.SUGAR),
 						Ingredient.of(Tags.Items.CROPS_WHEAT), Ingredient.of(ForgeTags.CROPS_RICE)))
-				.requires(Ingredient.of(Items.SUGAR)).requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 1000))
+				.requires(Ingredient.of(Items.SUGAR)).requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 1000))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightItems.YEAST.get()), dayTick * 3, true))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, false)).save(consumer);
 
 		VatRecipeBuilder.pickle(new ItemStack(ExtraDelightItems.VINEGAR.get(), 4), new ItemStack(Items.GLASS_BOTTLE, 4))
 				.requires(Ingredient.of(Items.SUGAR))
-				.requiresFluid(FluidIngredient.fromFluid(ExtraDelightFluids.APPLE_CIDER.FLUID.get(), 1000))
+				.requiresFluid(FluidIngredientCompat.fromFluid(ExtraDelightFluids.APPLE_CIDER.FLUID.get(), 1000))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightItems.YEAST.get()), dayTick * 3, true))
 				.requiresStage(new StageIngredient(Ingredient.EMPTY, dayTick * 7, false))
 				.save(consumer, "apple_cider_vinegar");
 
 		VatRecipeBuilder.pickle(new ItemStack(ExtraDelightItems.YEAST.get(), 16), new ItemStack(Items.GLASS_BOTTLE, 16))
 				.requires(Ingredient.of(ExtraDelightTags.FRUIT))
-				.requiresFluid(FluidIngredient.fromFluid(Fluids.WATER, 1000))
+				.requiresFluid(FluidIngredientCompat.fromFluid(Fluids.WATER, 1000))
 				.requiresStage(new StageIngredient(Ingredient.of(ExtraDelightItems.YEAST.get()), dayTick * 7, false))
 				.save(consumer);
 	}

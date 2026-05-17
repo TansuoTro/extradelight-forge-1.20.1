@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.lance5057.extradelight.ExtraDelightRecipes;
 import com.lance5057.extradelight.recipe.BottleFluidRegistryRecipe;
 import com.lance5057.extradelight.util.StackUtil;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -28,12 +28,12 @@ import java.util.function.Consumer;
 public class BottleFluidRegistryRecipeBuilder implements RecipeBuilder {
 
 	public Ingredient bottle;
-	public FluidIngredient fluid;
+	public FluidIngredientCompat fluid;
 	private Advancement.Builder advancement=Advancement.Builder.recipeAdvancement();
 	private String group = "";
 	private BottleFluidRegistryRecipe.Serializer serializer;
 
-	public BottleFluidRegistryRecipeBuilder(Ingredient bottle, FluidIngredient fluid) {
+	public BottleFluidRegistryRecipeBuilder(Ingredient bottle, FluidIngredientCompat fluid) {
 		this.bottle = bottle;
 		this.fluid = fluid;
 		this.serializer= new BottleFluidRegistryRecipe.Serializer();

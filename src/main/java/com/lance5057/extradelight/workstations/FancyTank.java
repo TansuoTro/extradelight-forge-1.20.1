@@ -1,7 +1,7 @@
 package com.lance5057.extradelight.workstations;
 
 import com.lance5057.extradelight.fluids.FluidKey;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.fluids.FluidStack;
@@ -224,7 +224,7 @@ public class FancyTank implements IFluidHandler, IFluidTank {
 		return doDrain(resource, action);
 	}
 
-	public FluidStack drain(FluidIngredient resource, FluidAction action) {
+	public FluidStack drain(FluidIngredientCompat resource, FluidAction action) {
 		FluidStack tmp =resource.getMatchingFluidStacks().get(0);
 		//FluidStack tmp = resource.getFluids()[0];
 		return doDrain(tmp, action);
@@ -283,7 +283,7 @@ public class FancyTank implements IFluidHandler, IFluidTank {
 	 * FluidStack.isSameFluidSameComponents(resource, fluid[i])) { return
 	 * doDrain(resource.getAmount(), action, i); } } return FluidStack.EMPTY; }
 	 * 
-	 * public FluidStack drain(SizedFluidIngredient resource, FluidAction action) {
+	 * public FluidStack drain(SizedFluidIngredientCompat resource, FluidAction action) {
 	 * for (int i = 0; i < this.getTanks(); i++) { if (resource.test(fluid[i])) {
 	 * return doDrain(resource.amount(), action, i); }
 	 * 

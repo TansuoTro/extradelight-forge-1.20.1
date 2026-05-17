@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.lance5057.extradelight.ExtraDelightRecipes;
 import com.lance5057.extradelight.util.StackUtil;
 import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.advancements.*;
 //import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
@@ -33,7 +33,7 @@ import java.util.function.Consumer;
 public class MixingBowlRecipeBuilder implements RecipeBuilder {
     private final ItemStack result;
     private final NonNullList<Ingredient> ingredients = NonNullList.create();
-    private final List<FluidIngredient> fluids = new ArrayList<>();
+    private final List<FluidIngredientCompat> fluids = new ArrayList<>();
     @Nullable
     private String group;
     final int stirs;
@@ -80,7 +80,7 @@ public class MixingBowlRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
-    public MixingBowlRecipeBuilder requires(FluidIngredient stack) {
+    public MixingBowlRecipeBuilder requires(FluidIngredientCompat stack) {
         this.fluids.add(stack);
         return this;
     }
@@ -127,7 +127,7 @@ public class MixingBowlRecipeBuilder implements RecipeBuilder {
         private final ResourceLocation id;
         private final String group;
         private final NonNullList<Ingredient> ingredients;
-        private final List<FluidIngredient> fluids;
+        private final List<FluidIngredientCompat> fluids;
         private final ItemStack result;
         private final int stirs;
         private final ItemStack usedItem;
@@ -136,7 +136,7 @@ public class MixingBowlRecipeBuilder implements RecipeBuilder {
 
 
         public Result(ResourceLocation id, String group, NonNullList<Ingredient> ingredients,
-                      List<FluidIngredient> fluids, ItemStack result, int stirs, ItemStack usedItem,
+                      List<FluidIngredientCompat> fluids, ItemStack result, int stirs, ItemStack usedItem,
                       Advancement.Builder advancement$builder, ResourceLocation advancementId) {
             this.id = id;
             this.group = group;
@@ -156,7 +156,7 @@ public class MixingBowlRecipeBuilder implements RecipeBuilder {
             }
 
             JsonArray fluidsArray = new JsonArray();
-            for (FluidIngredient fluid : this.fluids) {
+            for (FluidIngredientCompat fluid : this.fluids) {
                 fluidsArray.add(fluid.serialize());
             }
             jsonObject.add("fluids", fluidsArray);

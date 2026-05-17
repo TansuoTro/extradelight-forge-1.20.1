@@ -10,7 +10,7 @@ import com.lance5057.extradelight.workstations.FancyTank;
 import com.lance5057.extradelight.workstations.IFancyTankHandler;
 import com.lance5057.extradelight.workstations.vat.recipes.VatRecipe;
 import com.lance5057.extradelight.workstations.vat.recipes.VatRecipeWrapper;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -258,7 +258,7 @@ public class VatBlockEntity extends BlockEntity implements IFancyTankHandler<Vat
 						dropContainers(state, vat, level);
 						subtractItems(vat, result.getCount());
 
-						FluidIngredient sfi = FluidIngredient.fromFluidStack(recipeholder.getFluid());
+						FluidIngredientCompat sfi = FluidIngredientCompat.fromFluidStack(recipeholder.getFluid());
 						if (sfi.test(vat.fluid.getFluid()))
 							vat.fluid.drain(sfi.getRequiredAmount(), IFluidHandler.FluidAction.EXECUTE);
 						BlockEntityUtils.Inventory.dropItemInWorld(

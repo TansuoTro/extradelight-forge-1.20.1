@@ -7,7 +7,7 @@ import com.lance5057.extradelight.util.StackUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-//import com.simibubi.create.foundation.fluid.FluidIngredient;
+//import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraft.core.RegistryAccess;
@@ -132,7 +132,7 @@ public class EvaporatorRecipe implements Recipe<EvaporatorRecipeWrapper> {
 //
 //		public static EvaporatorRecipe fromNetwork(RegistryFriendlyByteBuf pBuffer) {
 //			String s = pBuffer.readUtf();
-//			SizedFluidIngredient fluid = SizedFluidIngredient.STREAM_CODEC.decode(pBuffer);
+//			SizedFluidIngredientCompat fluid = SizedFluidIngredient.STREAM_CODEC.decode(pBuffer);
 //			int g = pBuffer.readVarInt();
 //			ResourceLocation r = ResourceLocation.STREAM_CODEC.decode(pBuffer);
 //			ResourceLocation d = ResourceLocation.STREAM_CODEC.decode(pBuffer);

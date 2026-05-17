@@ -6,7 +6,7 @@ import com.lance5057.extradelight.ExtraDelightTags;
 import com.lance5057.extradelight.util.BottleFluidRegistry;
 import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipe;
 import com.mojang.blaze3d.systems.RenderSystem;
-//import com.simibubi.create.foundation.fluid.FluidIngredient;
+//import com.lance5057.extradelight.util.FluidIngredientCompat;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

@@ -5,7 +5,7 @@ import com.lance5057.extradelight.ExtraDelightRecipes;
 import com.lance5057.extradelight.util.BlockEntityUtils;
 import com.lance5057.extradelight.workstations.evaporator.recipes.EvaporatorRecipe;
 import com.lance5057.extradelight.workstations.evaporator.recipes.EvaporatorRecipeWrapper;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;

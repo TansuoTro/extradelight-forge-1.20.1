@@ -6,7 +6,7 @@ import com.lance5057.extradelight.ExtraDelightRecipes;
 import com.lance5057.extradelight.util.StackUtil;
 import com.lance5057.extradelight.workstations.vat.recipes.VatRecipe;
 import com.lance5057.extradelight.workstations.vat.recipes.VatRecipe.StageIngredient;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.advancements.*;
 //import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
@@ -58,7 +58,7 @@ public class VatRecipeBuilder implements RecipeBuilder {
 		return this;
 	}
 
-	public VatRecipeBuilder requiresFluid(FluidIngredient ingredient) {
+	public VatRecipeBuilder requiresFluid(FluidIngredientCompat ingredient) {
 		this.fluid=ingredient.getMatchingFluidStacks().get(0);
 		return this;
 	}

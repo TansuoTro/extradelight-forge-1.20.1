@@ -2,7 +2,6 @@ package com.lance5057.extradelight;
 
 import com.lance5057.butchercraft.Butchercraft;
 import com.mojang.blaze3d.shaders.FogShape;
-import com.simibubi.create.foundation.item.TooltipModifier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;

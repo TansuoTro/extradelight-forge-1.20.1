@@ -8,7 +8,7 @@ import com.lance5057.extradelight.workstations.FancyTank;
 import com.lance5057.extradelight.workstations.IFancyTankHandler;
 import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipe;
 import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipeWrapper;
-//import com.simibubi.create.foundation.fluid.FluidIngredient;
+//import com.lance5057.extradelight.util.FluidIngredientCompat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
