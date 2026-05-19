@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,style=0": {
+      "model": "extradelight:block/cosmetics/juicer/anvil",
+      "y": 90
+    },
+    "facing=east,style=1": {
+      "model": "extradelight:block/cosmetics/juicer/gold_block",
+      "y": 90
+    },
+    "facing=north,style=0": {
+      "model": "extradelight:block/cosmetics/juicer/anvil"
+    },
+    "facing=north,style=1": {
+      "model": "extradelight:block/cosmetics/juicer/gold_block"
+    },
+    "facing=south,style=0": {
+      "model": "extradelight:block/cosmetics/juicer/anvil",
+      "y": 180
+    },
+    "facing=south,style=1": {
+      "model": "extradelight:block/cosmetics/juicer/gold_block",
+      "y": 180
+    },
+    "facing=west,style=0": {
+      "model": "extradelight:block/cosmetics/juicer/anvil",
+      "y": 270
+    },
+    "facing=west,style=1": {
+      "model": "extradelight:block/cosmetics/juicer/gold_block",
+      "y": 270
+    }
+  }
+}
