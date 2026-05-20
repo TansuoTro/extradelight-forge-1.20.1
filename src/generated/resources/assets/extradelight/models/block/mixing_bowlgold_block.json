@@ -1,7 +1,6 @@
 {
   "parent": "extradelight:block/mixing_bowl",
   "textures": {
-    "1": "minecraft:block/gold_block",
-    "particle": "minecraft:block/gold_block"
+    "1": "minecraft:block/gold_block"
   }
 }

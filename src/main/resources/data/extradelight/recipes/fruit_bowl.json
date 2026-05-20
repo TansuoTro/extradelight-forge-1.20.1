@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "B": {
+            "item": "minecraft:bowl"
+        },
+        "S": {
+            "tag": "minecraft:wooden_slabs"
+        }
+    },
+    "pattern": [
+        " B ",
+        " S "
+    ],
+    "result": {
+        "item": "extradelight:fruit_bowl"
+    },
+    "show_notification": true
+}

@@ -1,0 +1,13 @@
+{
+  "type": "extradelight:evaporator",
+  "display_block": "extradelight:salt_block",
+  "fluid": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "loottable": "extradelight:evaporator/water",
+  "outItem": {
+    "item": "extradelight:salt"
+  },
+  "time": 10000
+}

@@ -7,6 +7,7 @@ import com.lance5057.extradelight.ExtraDelightItems;
 import com.lance5057.extradelight.TranslatableKeys;
 import com.lance5057.extradelight.aesthetics.AestheticBlocks;
 import com.lance5057.extradelight.modules.Fermentation;
+import com.lance5057.extradelight.modules.SummerCitrus;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 //import net.neoforged.neoforge.common.data.LanguageProvider;
@@ -1264,6 +1265,41 @@ public class EnglishLoc extends LanguageProvider {
 		this.add(ExtraDelightItems.PORK_AND_APPLES_FEAST.get(), "Pork and Apples");
 		this.add(ExtraDelightItems.PORK_AND_APPLES.get(), "Bowl of Pork and Apples");
 		this.add(ExtraDelightItems.APPLE_CHIPS.get(), "Apple Chips");
+
+		this.add(SummerCitrus.LEMON.get(), "Lemon");
+		this.add(SummerCitrus.LEMON_LEAVES_ITEM.get(), "Lemon Leaves");
+		this.add(SummerCitrus.LEMON_SAPLING.get(), "Lemon Sapling");
+		this.add(SummerCitrus.LEMON_PETAL_LITTER_ITEM.get(), "Lemon Petal Litter");
+		this.add(SummerCitrus.LEMON_JUICE.get(), "Lemon Juice");
+		this.add(SummerCitrus.LEMON_CRATE_ITEM.get(), "Lemon Crate");
+		this.add(SummerCitrus.SLICED_LEMON.get(), "Sliced Lemon");
+		this.add(SummerCitrus.LEMON_ZEST.get(), "Lemon Zest");
+
+		this.add(SummerCitrus.LIME.get(), "Lime");
+		this.add(SummerCitrus.LIME_LEAVES_ITEM.get(), "Lime Leaves");
+		this.add(SummerCitrus.LIME_SAPLING.get(), "Lime Sapling");
+		this.add(SummerCitrus.LIME_PETAL_LITTER_ITEM.get(), "Lime Petal Litter");
+		this.add(SummerCitrus.LIME_JUICE.get(), "Lime Juice");
+		this.add(SummerCitrus.LIME_CRATE_ITEM.get(), "Lime Crate");
+		this.add(SummerCitrus.SLICED_LIME.get(), "Sliced Lime");
+		this.add(SummerCitrus.LIME_ZEST.get(), "Lime Zest");
+
+		this.add(SummerCitrus.ORANGE.get(), "Orange");
+		this.add(SummerCitrus.ORANGE_LEAVES_ITEM.get(), "Orange Leaves");
+		this.add(SummerCitrus.ORANGE_SAPLING.get(), "Orange Sapling");
+		this.add(SummerCitrus.ORANGE_PETAL_LITTER_ITEM.get(), "Orange Petal Litter");
+		this.add(SummerCitrus.ORANGE_JUICE.get(), "Orange Juice");
+		this.add(SummerCitrus.ORANGE_CRATE_ITEM.get(), "Orange Crate");
+		this.add(SummerCitrus.SLICED_ORANGE.get(), "Sliced Orange");
+		this.add(SummerCitrus.ORANGE_ZEST.get(), "Orange Zest");
+
+		this.add(SummerCitrus.GRAPEFRUIT.get(), "Grapefruit");
+		this.add(SummerCitrus.GRAPEFRUIT_LEAVES_ITEM.get(), "Grapefruit Leaves");
+		this.add(SummerCitrus.GRAPEFRUIT_SAPLING.get(), "Grapefruit Sapling");
+		this.add(SummerCitrus.GRAPEFRUIT_PETAL_LITTER_ITEM.get(), "Grapefruit Petal Litter");
+		this.add(SummerCitrus.GRAPEFRUIT_JUICE.get(), "Grapefruit Juice");
+		this.add(SummerCitrus.GRAPEFRUIT_CRATE_ITEM.get(), "Grapefruit Crate");
+		this.add(SummerCitrus.SLICED_GRAPEFRUIT.get(), "Sliced Grapefruit");
 		this.add(ExtraDelightItems.STUFFED_APPLES_FEAST.get(), "Stuffed Apples");
 		this.add(ExtraDelightItems.STUFFED_APPLE.get(), "Stuffed Apple");
 		this.add(ExtraDelightItems.STUFFED_APPLE_ICE_CREAM.get(), "Stuffed Apple with Ice Cream");
@@ -1375,9 +1411,15 @@ public class EnglishLoc extends LanguageProvider {
 
 		this.add(ExtraDelightItems.DYNAMIC_TOAST.get(), "%s on Toast");
 
+		this.add(ExtraDelightBlocks.FRUIT_BOWL.get(), "Fruit Bowl");
 		this.add(ExtraDelightBlocks.POTTED_CINNAMON_SAPLING.get(), "Potted Cinnamon Sapling");
 		this.add(ExtraDelightBlocks.POTTED_HAZELNUT_SAPLING.get(), "Potted Hazelnut Sapling");
 		this.add(ExtraDelightBlocks.POTTED_APPLE_SAPLING.get(), "Potted Apple Sapling");
+
+		this.add(SummerCitrus.POTTED_LEMON_SAPLING.get(), "Potted Lemon Sapling");
+		this.add(SummerCitrus.POTTED_LIME_SAPLING.get(), "Potted Lime Sapling");
+		this.add(SummerCitrus.POTTED_ORANGE_SAPLING.get(), "Potted Orange Sapling");
+		this.add(SummerCitrus.POTTED_GRAPEFRUIT_SAPLING.get(), "Potted Grapefruit Sapling");
 
 		Fermentation.EngLoc(this);
 		AestheticBlocks.EngLoc(this);

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舞萌歌曲随机抽选器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #e94560, #f5af19, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .controls {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #e94560;
+        }
+
+        .range-inputs {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .range-input {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .range-input input, .range-input select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #e94560;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .range-input input:focus, .range-input select:focus {
+            outline: none;
+            border-color: #f5af19;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(233, 69, 96, 0.3);
+        }
+
+        .checkbox-item input {
+            width: 20px;
+            height: 20px;
+            accent-color: #e94560;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #e94560, #f5af19);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .result {
+            display: none;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .song-display {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .song-cover {
+            flex: 0 0 300px;
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: #000;
+        }
+
+        .song-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .song-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #f5af19;
+        }
+
+        .song-detail {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .detail-label {
+            color: #e94560;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .diff-easy { background: #4caf50; }
+        .diff-medium { background: #ff9800; }
+        .diff-hard { background: #f44336; }
+        .diff-expert { background: #9c27b0; }
+        .diff-master { background: #000; border: 2px solid #f5af19; }
+
+        .stats {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+
+        .stats-text {
+            color: #aaa;
+        }
+
+        .history {
+            margin-top: 20px;
+        }
+
+        .history-title {
+            color: #e94560;
+            margin-bottom: 10px;
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .history-item:hover {
+            background: rgba(233, 69, 96, 0.2);
+        }
+
+        .history-cover {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .history-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .history-info {
+            flex: 1;
+        }
+
+        .history-name {
+            font-weight: bold;
+        }
+
+        .history-difficulty {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Modal for full screen image */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px;
+            color: #aaa;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e94560;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .song-display { flex-direction: column; }
+            .song-cover { flex: none; width: 100%; max-width: 300px; margin: 0 auto; }
+            .song-detail { grid-template-columns: 1fr; }
+        }
+
+        .result-row, .preview-row {
+            display: grid;
+            grid-template-columns: 60px 80px 1fr 80px 60px 60px 60px;
+            gap: 15px;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .result-row:hover, .preview-row:hover {
+            background: rgba(233, 69, 96, 0.2);
+        }
+
+        .song-cover-small {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .song-cover-small img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song-id {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #f5af19;
+        }
+
+        .song-type, .song-level, .song-category {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .song-type { color: #4fc3f7; }
+        .song-level { color: #81c784; }
+        .song-category { color: #e94560; }
+
+        /* Simplified preview layout */
+        .preview-simple {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 8px;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 80px;
+        }
+
+        .preview-simple:hover {
+            background: rgba(233, 69, 96, 0.3);
+            transform: scale(1.05);
+        }
+
+        .preview-cover {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+            margin-bottom: 8px;
+        }
+
+        .preview-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-diff {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #81c784;
+            text-align: center;
+        }
+
+        #allSongsDisplay {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 舞萌歌曲随机抽选器</h1>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>📊 难度范围 (定数)</label>
+                <div class="range-inputs">
+                    <div class="range-input">
+                        <input type="number" id="difficultyMin" value="14.0" step="0.1" min="0" max="20" placeholder="最低">
+                    </div>
+                    <div class="range-input">
+                        <input type="number" id="difficultyMax" value="15.0" step="0.1" min="0" max="20" placeholder="最高">
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>🎵 类型筛选 (DX/SD)</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="showDX" checked> DX
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="showSD" checked> SD
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>⭐ 难度等级筛选 (MAS/REM)</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="showMAS" checked> MAS
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="showREM" checked> REM
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>🎨 分类筛选</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="showA" checked> A类
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="showB" checked> B类
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="showC" checked> C类
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>🎲 抽选数量</label>
+                <div class="range-input">
+                    <input type="number" id="pickCount" value="1" min="1" max="10">
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="pickSongs()">🎲 开始抽选!</button>
+            <button class="btn btn-secondary" id="togglePreviewBtn" onclick="togglePreview()">📋 显示曲池预览</button>
+        </div>
+
+        <div class="result" id="allSongsResult" style="display: none;">
+            <h3 class="history-title" style="cursor:pointer;" onclick="togglePreview()">
+                📋 曲池预览 (共 <span id="totalCount">0</span> 首) - 点击收起
+            </h3>
+            <div id="allSongsDisplay"></div>
+        </div>
+
+        <div class="result" id="result">
+            <h3 class="history-title">🎲 抽取结果 (<span id="pickCountDisplay">0</span> 首)</h3>
+            <div class="song-display" id="songDisplay"></div>
+        </div>
+
+        <div class="history" id="historySection" style="display: none;">
+            <h3 class="history-title">📜 抽选历史</h3>
+            <div class="history-list" id="historyList"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <img id="modalImage" src="" alt="Cover">
+    </div>
+
+    <script>
+        const songs = [
+            {id:"A01",title:"デッドマンズバラッド",artist:"Dead Man's Ballad",difficulty:14.2,category:"A",type:"DX",level:"MAS"},
+            {id:"A02",title:"Beat Of Mind",artist:"Beat of Mind",difficulty:14.2,category:"A",type:"SD",level:"REM"},
+            {id:"A03",title:"U&iVERSE -銀河鸞翔-",artist:"U&iverse",difficulty:14.3,category:"A",type:"DX",level:"MAS"},
+            {id:"A04",title:"田中",artist:"Tanaka",difficulty:14.3,category:"A",type:"DX",level:"MAS"},
+            {id:"A05",title:"STEEL TRANSONIC",artist:"Steel Transonic",difficulty:14.3,category:"A",type:"DX",level:"MAS"},
+            {id:"A06",title:"Caliburne ～Story of the Legendary sword～",artist:"Caliburne",difficulty:14.3,category:"A",type:"SD",level:"MAS"},
+            {id:"A07",title:"≠彡\"/了→",artist:"Kimitsu A",difficulty:14.4,category:"A",type:"DX",level:"MAS"},
+            {id:"A08",title:"FLUFFY FLASH",artist:"Fluffy Flash",difficulty:14.4,category:"A",type:"DX",level:"MAS"},
+            {id:"A09",title:"QuiQ",artist:"Quiq",difficulty:14.4,category:"A",type:"DX",level:"MAS"},
+            {id:"A10",title:"Moon of Noon",artist:"Moon of Noon",difficulty:14.4,category:"A",type:"SD",level:"MAS"},
+            {id:"A11",title:"Contrapasso -paradiso-",artist:"Contrapasso",difficulty:14.4,category:"A",type:"SD",level:"MAS"},
+            {id:"A12",title:"極圏",artist:"Gokuken",difficulty:14.4,category:"A",type:"SD",level:"MAS"},
+            {id:"A13",title:"初音ミクの消失",artist:"Hatsune Miku no Shoshitsu",difficulty:14.5,category:"A",type:"DX",level:"MAS"},
+            {id:"A14",title:"BIRTH",artist:"Birth",difficulty:14.5,category:"A",type:"DX",level:"MAS"},
+            {id:"A15",title:"Sqlupp (Camellia's \"Sqleipd*Hiytex\" Remix)",artist:"Sqlupp",difficulty:14.5,category:"A",type:"DX",level:"MAS"},
+            {id:"A16",title:"Falsum Atlantis.",artist:"Falsum Atlantis",difficulty:14.5,category:"A",type:"DX",level:"MAS"},
+            {id:"A17",title:"RondeauX of RagnaroQ",artist:"Rondeaux of Ragnaroq",difficulty:14.5,category:"A",type:"DX",level:"MAS"},
+            {id:"A18",title:"最強STRONGER",artist:"Saikyo Stronger",difficulty:14.5,category:"A",type:"DX",level:"MAS"},
+            {id:"A19",title:"Axeria",artist:"Axeria",difficulty:14.5,category:"A",type:"SD",level:"MAS"},
+            {id:"A20",title:"ジングルベル",artist:"Jingle Bell",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A21",title:"Titania",artist:"Titania",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A22",title:"BREaK! BREaK! BREaK!",artist:"Break Break Break",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A23",title:"BLACK SWAN",artist:"Black Swan",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A24",title:"脳天直撃",artist:"Notenchokugeki",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A25",title:"Λzure Vixen",artist:"Azure Vixen",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A26",title:"mystique as iris",artist:"Mystique as Iris",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A27",title:"ViRTUS",artist:"Virtus",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A28",title:"VERTeX (rintaro soma deconstructed remix)",artist:"Vertex remix",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A29",title:"神威",artist:"Kamui",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A30",title:"AMABIE",artist:"Amabie",difficulty:14.6,category:"A",type:"DX",level:"MAS"},
+            {id:"A31",title:"Credits",artist:"Credits",difficulty:14.6,category:"A",type:"SD",level:"MAS"},
+            {id:"A32",title:"TiamaT:F minor",artist:"Tiamat",difficulty:14.6,category:"A",type:"SD",level:"MAS"},
+            {id:"A33",title:"Prophesy One",artist:"Prophesy One",difficulty:14.6,category:"A",type:"SD",level:"MAS"},
+            {id:"A34",title:"Fragrance",artist:"Fragrance",difficulty:14.6,category:"A",type:"SD",level:"REM"},
+            {id:"A35",title:"Valsqotch",artist:"Valsqotch",difficulty:14.7,category:"A",type:"DX",level:"MAS"},
+            {id:"A36",title:"Regulus",artist:"Regulus",difficulty:14.7,category:"A",type:"DX",level:"MAS"},
+            {id:"A37",title:"Metamorphosism",artist:"Metamorphosism",difficulty:14.7,category:"A",type:"DX",level:"MAS"},
+            {id:"A38",title:"Apollo",artist:"Apollo",difficulty:14.7,category:"A",type:"DX",level:"MAS"},
+            {id:"A39",title:"Re:Unknown X",artist:"Re Unknown X",difficulty:14.7,category:"A",type:"DX",level:"MAS"},
+            {id:"A40",title:"GIGANTØMAKHIA",artist:"Gigantomakhia",difficulty:14.7,category:"A",type:"DX",level:"MAS"},
+            {id:"A41",title:"KHYMΞXΛ",artist:"Chimera",difficulty:14.7,category:"A",type:"DX",level:"MAS"},
+            {id:"A42",title:"VERTeX",artist:"Vertex",difficulty:14.7,category:"A",type:"SD",level:"MAS"},
+            {id:"A43",title:"AMAZING MIGHTYYYY!!!!",artist:"Amazing Mightyyyy",difficulty:14.7,category:"A",type:"SD",level:"MAS"},
+            {id:"A44",title:"Excalibur ～Revived resolution～",artist:"Excalibur",difficulty:14.7,category:"A",type:"SD",level:"MAS"},
+            {id:"A45",title:"ガラテアの螺旋",artist:"Garatia no Rasen",difficulty:14.7,category:"A",type:"SD",level:"REM"},
+            {id:"A46",title:"Divide et impera!",artist:"Divide et Impera",difficulty:14.8,category:"A",type:"DX",level:"MAS"},
+            {id:"A47",title:"チューリングの跡",artist:"Turing no Seki",difficulty:14.8,category:"A",type:"DX",level:"MAS"},
+            {id:"A48",title:"WiPE OUT MEMORIES",artist:"Wipe out Memories",difficulty:14.8,category:"A",type:"DX",level:"MAS"},
+            {id:"A49",title:"封焔の135秒",artist:"Hogen no 135 Byo",difficulty:14.8,category:"A",type:"DX",level:"MAS"},
+            {id:"A50",title:"Straight into the lights",artist:"Straight into the Lights",difficulty:14.8,category:"A",type:"DX",level:"MAS"},
+            {id:"A51",title:"VeRForTe αRtE:VEiN",artist:"Verforte Arte Vein",difficulty:14.8,category:"A",type:"DX",level:"MAS"},
+            {id:"A52",title:"SILENT BLUE",artist:"Silent Blue",difficulty:14.8,category:"A",type:"SD",level:"MAS"},
+            {id:"A53",title:"In  Chaos",artist:"In Chaos",difficulty:14.8,category:"A",type:"SD",level:"REM"},
+            {id:"A54",title:"larva",artist:"Larva",difficulty:14.8,category:"A",type:"SD",level:"MAS"},
+            {id:"A55",title:"雷切-RAIKIRI-",artist:"Raikiri",difficulty:14.8,category:"A",type:"SD",level:"REM"},
+            {id:"A56",title:"Alea jacta est!",artist:"Alea Jacta Est",difficulty:14.8,category:"A",type:"SD",level:"REM"},
+            {id:"A57",title:"QZKago Requiem",artist:"Kuzukago Requiem",difficulty:14.8,category:"A",type:"SD",level:"MAS"},
+            {id:"A58",title:"QZKago Requiem",artist:"Kuzukago Requiem",difficulty:14.9,category:"A",type:"SD",level:"REM"},
+            {id:"A59",title:"sølips",artist:"Solips",difficulty:14.9,category:"A",type:"DX",level:"MAS"},
+            {id:"A60",title:"raputa",artist:"Raputa",difficulty:14.9,category:"A",type:"DX",level:"MAS"},
+            {id:"A61",title:"Latent Kingdom",artist:"Latent Kingdom",difficulty:14.9,category:"A",type:"DX",level:"MAS"},
+            {id:"A62",title:"the EmpErroR",artist:"The Emperror",difficulty:14.9,category:"A",type:"SD",level:"REM"},
+            {id:"A63",title:"躯樹の墓守",artist:"Mukuroju no Hakamori",difficulty:14.9,category:"A",type:"DX",level:"MAS"},
+            {id:"A64",title:"PANDORA PARADOXXX",artist:"Pandora Paradoxxx",difficulty:14.9,category:"A",type:"SD",level:"MAS"},
+            {id:"A65",title:"PANDORA PARADOXXX",artist:"Pandora Paradoxxx",difficulty:15.0,category:"A",type:"SD",level:"REM"},
+            {id:"B01",title:"Amereistr",artist:"Amereistr",difficulty:13.9,category:"B",type:"DX",level:"MAS"},
+            {id:"B02",title:"MYTH Re：LEASE",artist:"Myth Release",difficulty:14.5,category:"B",type:"DX",level:"MAS"},
+            {id:"B03",title:"Åntinomiε",artist:"Antinomie",difficulty:14.6,category:"B",type:"DX",level:"MAS"},
+            {id:"B04",title:"Customized Justice",artist:"Customized Justice",difficulty:14.8,category:"B",type:"DX",level:"MAS"},
+            {id:"B05",title:"氷滅の135小節",artist:"Hyometsu no 135 Shosetsu",difficulty:14.8,category:"B",type:"DX",level:"MAS"},
+            {id:"B06",title:"FLΛME/FRΦST",artist:"Flame Frost",difficulty:14.8,category:"B",type:"DX",level:"MAS"},
+            {id:"B07",title:"World's end BLACKBOX",artist:"World's End Blackbox",difficulty:14.9,category:"B",type:"DX",level:"MAS"},
+            {id:"C01",title:"Biotonic",artist:"Biotonic",difficulty:14.2,category:"C",type:"DX",level:"MAS"},
+            {id:"C02",title:"Bad Elixir",artist:"Bad Elixir",difficulty:14.4,category:"C",type:"DX",level:"MAS"},
+            {id:"C03",title:"Xperanza",artist:"Xperanza",difficulty:14.5,category:"C",type:"DX",level:"MAS"},
+            {id:"C04",title:"seven states of dreamscape",artist:"seven states of dreamscape",difficulty:14.7,category:"C",type:"DX",level:"REM"}
+        ];
+
+        const coverPath = "D:/allshit/opencodeshit/maimai/ppt/covers/";
+
+        // 历史记录
+        let history = [];
+
+        function pickSongs() {
+            const minDiff = parseFloat(document.getElementById('difficultyMin').value);
+            const maxDiff = parseFloat(document.getElementById('difficultyMax').value);
+            const showDX = document.getElementById('showDX').checked;
+            const showSD = document.getElementById('showSD').checked;
+            const showMAS = document.getElementById('showMAS').checked;
+            const showREM = document.getElementById('showREM').checked;
+            const showA = document.getElementById('showA').checked;
+            const showB = document.getElementById('showB').checked;
+            const showC = document.getElementById('showC').checked;
+            const pickCount = parseInt(document.getElementById('pickCount').value);
+
+            // 筛选歌曲
+            let filtered = songs.filter(song => {
+                const diffMatch = song.difficulty >= minDiff && song.difficulty <= maxDiff;
+                const typeMatch = (song.type === 'DX' && showDX) || (song.type === 'SD' && showSD);
+                const levelMatch = (song.level === 'MAS' && showMAS) || (song.level === 'REM' && showREM);
+                const categoryMatch = (song.category === 'A' && showA) ||
+                                     (song.category === 'B' && showB) ||
+                                     (song.category === 'C' && showC);
+                return diffMatch && typeMatch && levelMatch && categoryMatch;
+            });
+
+            if (filtered.length === 0) {
+                alert('没有符合条件的歌曲! 请调整筛选条件.');
+                return;
+            }
+
+            // 随机抽取
+            const picked = [];
+            const available = [...filtered];
+
+            for (let i = 0; i < Math.min(pickCount, available.length); i++) {
+                const randomIndex = Math.floor(Math.random() * available.length);
+                picked.push(available[randomIndex]);
+                available.splice(randomIndex, 1);
+            }
+
+            // 显示结果
+            displayResults(picked);
+
+            // 保存到历史
+            history = [...picked, ...history].slice(0, 20);
+            updateHistory();
+        }
+
+        function displayResults(songs, isPreview = false) {
+            const display = isPreview ? document.getElementById('allSongsDisplay') : document.getElementById('songDisplay');
+            const resultDiv = isPreview ? document.getElementById('allSongsResult') : document.getElementById('result');
+            const totalCount = document.getElementById('totalCount');
+
+            if (songs.length === 0) {
+                display.innerHTML = '<div class="empty-state">没有符合条件的歌曲</div>';
+                if (isPreview) resultDiv.style.display = 'block';
+                else resultDiv.classList.add('show');
+                return;
+            }
+
+            let html = '';
+            const filteredCount = songs.length;
+
+            songs.forEach((song, index) => {
+                const diffClass = getDifficultyClass(song.difficulty);
+                
+                if (isPreview) {
+                    // 简化预览：只显示封面 + "mas 14.9" 格式
+                    html += `
+                        <div class="preview-simple" onclick="showImage('${song.id}')">
+                            <div class="preview-cover">
+                                <img src="${coverPath}${song.id}.png" alt="${song.id}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23333%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23fff%22 font-size=%2220%22>${song.id}</text></svg>'">
+                            </div>
+                            <div class="preview-diff">${song.level.toLowerCase()} ${song.difficulty}</div>
+                        </div>
+                    `;
+                } else {
+                    const rowClass = 'result-row';
+                    html += `
+                        <div class="${rowClass}" onclick="showImage('${song.id}')">
+                            <div class="song-cover-small">
+                                <img src="${coverPath}${song.id}.png" alt="${song.id}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23333%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23fff%22 font-size=%2220%22>${song.id}</text></svg>'">
+                            </div>
+                            <div class="song-id">${song.id}</div>
+                            <div class="song-title">${song.artist}</div>
+                            <div class="song-difficulty">
+                                <span class="difficulty-badge ${diffClass}">${song.difficulty}</span>
+                            </div>
+                            <div class="song-type">${song.type}</div>
+                            <div class="song-level">${song.level}</div>
+                            <div class="song-category">${song.category}</div>
+                        </div>
+                    `;
+                }
+            });
+
+            if (isPreview) {
+                display.innerHTML = html;
+                totalCount.textContent = filteredCount;
+                resultDiv.style.display = 'block';
+            } else {
+                display.innerHTML = html;
+                document.getElementById('pickCountDisplay').textContent = songs.length;
+                resultDiv.classList.add('show');
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        let previewExpanded = false;
+
+        function togglePreview() {
+            const resultDiv = document.getElementById('allSongsResult');
+            const btn = document.getElementById('togglePreviewBtn');
+            
+            if (previewExpanded) {
+                resultDiv.style.display = 'none';
+                btn.textContent = '📋 显示曲池预览';
+                previewExpanded = false;
+            } else {
+                // 筛选并显示
+                const minDiff = parseFloat(document.getElementById('difficultyMin').value) || 0;
+                const maxDiff = parseFloat(document.getElementById('difficultyMax').value) || 20;
+                const showDX = document.getElementById('showDX').checked;
+                const showSD = document.getElementById('showSD').checked;
+                const showMAS = document.getElementById('showMAS').checked;
+                const showREM = document.getElementById('showREM').checked;
+                const showA = document.getElementById('showA').checked;
+                const showB = document.getElementById('showB').checked;
+                const showC = document.getElementById('showC').checked;
+
+                let filtered = songs.filter(song => {
+                    const diffMatch = song.difficulty >= minDiff && song.difficulty <= maxDiff;
+                    const typeMatch = (song.type === 'DX' && showDX) || (song.type === 'SD' && showSD);
+                    const levelMatch = (song.level === 'MAS' && showMAS) || (song.level === 'REM' && showREM);
+                    const categoryMatch = (song.category === 'A' && showA) ||
+                                         (song.category === 'B' && showB) ||
+                                         (song.category === 'C' && showC);
+                    return diffMatch && typeMatch && levelMatch && categoryMatch;
+                });
+
+                displayResults(filtered, true);
+                btn.textContent = '📋 收起曲池预览';
+                previewExpanded = true;
+            }
+        }
+
+        function showAllSongs() {
+            const minDiff = parseFloat(document.getElementById('difficultyMin').value);
+            const maxDiff = parseFloat(document.getElementById('difficultyMax').value);
+            const showDX = document.getElementById('showDX').checked;
+            const showSD = document.getElementById('showSD').checked;
+            const showMAS = document.getElementById('showMAS').checked;
+            const showREM = document.getElementById('showREM').checked;
+            const showA = document.getElementById('showA').checked;
+            const showB = document.getElementById('showB').checked;
+            const showC = document.getElementById('showC').checked;
+
+            let filtered = songs.filter(song => {
+                const diffMatch = song.difficulty >= minDiff && song.difficulty <= maxDiff;
+                const typeMatch = (song.type === 'DX' && showDX) || (song.type === 'SD' && showSD);
+                const levelMatch = (song.level === 'MAS' && showMAS) || (song.level === 'REM' && showREM);
+                const categoryMatch = (song.category === 'A' && showA) ||
+                                     (song.category === 'B' && showB) ||
+                                     (song.category === 'C' && showC);
+                return diffMatch && typeMatch && levelMatch && categoryMatch;
+            });
+
+            displayResults(filtered, true);
+        }
+
+        function getDifficultyClass(diff) {
+            if (diff <= 13.5) return 'diff-easy';
+            if (diff <= 14.0) return 'diff-medium';
+            if (diff <= 14.5) return 'diff-hard';
+            if (diff <= 14.8) return 'diff-expert';
+            return 'diff-master';
+        }
+
+        function updateHistory() {
+            const historySection = document.getElementById('historySection');
+            const historyList = document.getElementById('historyList');
+
+            if (history.length === 0) {
+                historySection.style.display = 'none';
+                return;
+            }
+
+            historySection.style.display = 'block';
+
+            let html = '';
+            history.forEach((song, index) => {
+                html += `
+                    <div class="history-item" onclick="pickAgain(${index})">
+                        <div class="history-cover">
+                            <img src="${coverPath}${song.id}.png" alt="${song.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23333%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23fff%22 font-size=%2212%22>${song.id}</text></svg>'">
+                        </div>
+                        <div class="history-info">
+                            <div class="history-name">${song.title}</div>
+                            <div class="history-difficulty">${song.artist} | ★${song.difficulty}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            historyList.innerHTML = html;
+        }
+
+        function pickAgain(index) {
+            displayResults([history[index]]);
+        }
+
+        function clearHistory() {
+            history = [];
+            updateHistory();
+        }
+
+        function showImage(id) {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('modalImage');
+            img.src = coverPath + id + '.png';
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('show');
+        }
+
+        // 键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+            if (e.key === 'Enter' && e.target.tagName !== 'INPUT') {
+                pickSongs();
+            }
+        });
+
+        // 页面加载时从localStorage恢复历史
+        window.onload = function() {
+            const savedHistory = localStorage.getItem('maimaiHistory');
+            if (savedHistory) {
+                history = JSON.parse(savedHistory);
+                updateHistory();
+            }
+        };
+
+        // 保存历史到localStorage
+        window.onbeforeunload = function() {
+            localStorage.setItem('maimaiHistory', JSON.stringify(history));
+        };
+    </script>
+</body>
+</html>

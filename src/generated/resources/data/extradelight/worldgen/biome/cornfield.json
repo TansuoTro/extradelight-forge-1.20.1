@@ -16,20 +16,19 @@
     "water_fog_color": 1248036
   },
   "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
     [
       "extradelight:rail_placer",
+      "extradelight:corn_placer",
       "minecraft:patch_pumpkin"
-    ],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [
-      "extradelight:corn_placer"
     ]
   ],
   "has_precipitation": true,

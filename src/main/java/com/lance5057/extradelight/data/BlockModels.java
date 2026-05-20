@@ -11,6 +11,7 @@ import com.lance5057.extradelight.blocks.crops.corn.CornProperties;
 import com.lance5057.extradelight.blocks.crops.corn.CornTop;
 import com.lance5057.extradelight.blocks.lid.LidBlock;
 import com.lance5057.extradelight.modules.Fermentation;
+import com.lance5057.extradelight.modules.SummerCitrus;
 import com.lance5057.extradelight.workstations.evaporator.EvaporatorBlock;
 import com.lance5057.extradelight.workstations.mixingbowl.MixingBowlBlock;
 import com.lance5057.extradelight.workstations.mortar.MortarBlock;
@@ -287,6 +288,11 @@ public class BlockModels extends BlockStateProvider {
 
 		fruitLeafBlock(this, ExtraDelightBlocks.HAZELNUT_LEAVES.get(), "hazelnut");
 
+		fruitLeafBlock(this, SummerCitrus.LEMON_LEAVES.get(), "lemon");
+		fruitLeafBlock(this, SummerCitrus.LIME_LEAVES.get(), "lime");
+		fruitLeafBlock(this, SummerCitrus.ORANGE_LEAVES.get(), "orange");
+		fruitLeafBlock(this, SummerCitrus.GRAPEFRUIT_LEAVES.get(), "grapefruit");
+
 		styleBlock(this, ExtraDelightBlocks.DARK_CHOCOLATE_BLOCK.get(), ChocolateStyleBlock.STYLE,
 				"block/cosmetics/chocolate/dark_chocolate");
 		fenceBlock(ExtraDelightBlocks.DARK_CHOCOLATE_FENCE.get(), ResourceLocation
@@ -535,6 +541,11 @@ public class BlockModels extends BlockStateProvider {
 
 		vanillaFruitLeafBlock(this, ExtraDelightBlocks.APPLE_LEAVES.get(), "apple");
 		simpleCross(this, ExtraDelightBlocks.APPLE_SAPLING.get(), "crops/fruit/apple/apple_sapling");
+
+		simpleCross(this, SummerCitrus.LEMON_SAPLING.get(), "crops/fruit/lemon/lemon_sapling");
+		simpleCross(this, SummerCitrus.LIME_SAPLING.get(), "crops/fruit/lime/lime_sapling");
+		simpleCross(this, SummerCitrus.ORANGE_SAPLING.get(), "crops/fruit/orange/orange_sapling");
+		simpleCross(this, SummerCitrus.GRAPEFRUIT_SAPLING.get(), "crops/fruit/grapefruit/grapefruit_sapling");
 		recipeFeastBlock(this, ExtraDelightBlocks.PORK_AND_APPLES_FEAST.get());
 		recipeFeastBlock(this, ExtraDelightBlocks.STUFFED_APPLES_FEAST.get());
 		pieLikeBlock(this, ExtraDelightBlocks.TARTE_TATIN.get(), "tarte_tatin");
@@ -656,6 +667,14 @@ public class BlockModels extends BlockStateProvider {
 		pottedBlock(this, ExtraDelightBlocks.POTTED_CINNAMON_SAPLING.get(), "cinnamon_sapling", "cinnamon_sapling");
 		pottedBlock(this, ExtraDelightBlocks.POTTED_HAZELNUT_SAPLING.get(), "hazelnut_sapling", "crops/fruit/hazelnut/hazelnut_sapling");
 		pottedBlock(this, ExtraDelightBlocks.POTTED_APPLE_SAPLING.get(), "apple_sapling", "crops/fruit/apple/apple_sapling");
+
+		pottedBlock(this, SummerCitrus.POTTED_LEMON_SAPLING.get(), "lemon_sapling", "crops/fruit/lemon/lemon_sapling");
+		pottedBlock(this, SummerCitrus.POTTED_LIME_SAPLING.get(), "lime_sapling", "crops/fruit/lime/lime_sapling");
+		pottedBlock(this, SummerCitrus.POTTED_ORANGE_SAPLING.get(), "orange_sapling", "crops/fruit/orange/orange_sapling");
+		pottedBlock(this, SummerCitrus.POTTED_GRAPEFRUIT_SAPLING.get(), "grapefruit_sapling", "crops/fruit/grapefruit/grapefruit_sapling");
+
+		simpleBlock(ExtraDelightBlocks.FRUIT_BOWL.get(), models()
+			.getExistingFile(ResourceLocation.fromNamespaceAndPath(ExtraDelight.MOD_ID, "block/fruit_bowl")));
 
 		AestheticBlocks.blockModel(this);
 		Fermentation.blockModels(this);

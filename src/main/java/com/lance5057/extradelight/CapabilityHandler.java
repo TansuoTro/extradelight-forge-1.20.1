@@ -127,7 +127,7 @@ public class CapabilityHandler {
         if(be instanceof FruitBowlBlockEntity cbe){addItemHandler(event,"fruit_bowl",cbe::getItemHandler);}
         if(be instanceof DryingRackBlockEntity cbe){addItemHandler(event,"drying_rack",cbe::getItemHandler);}
         if(be instanceof FoodDisplayEntity cbe){addItemHandler(event,"food_display",cbe::getItemHandler);}
-        if(be instanceof KnifeBlockEntity cbe){addItemHandler(event,"Knife_block",cbe::getItemHandler);}
+        if(be instanceof KnifeBlockEntity cbe){addItemHandler(event,"knife_block",cbe::getItemHandler);}
         if(be instanceof MixingBowlBlockEntity cbe){addItemFluidHandler(event,"mixing_bowl",cbe::getItemHandler,cbe::getFluidTank);}
         if(be instanceof MortarBlockEntity cbe){addItemFluidHandler(event,"mortar",cbe::getItemHandler,cbe::getFluidTank);}
         if(be instanceof JuicerBlockEntity cbe){addItemFluidHandler(event,"juicer",cbe::getItemHandler,cbe::getFluidTank);}

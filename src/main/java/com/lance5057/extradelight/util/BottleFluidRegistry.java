@@ -9,6 +9,7 @@ import com.lance5057.extradelight.ExtraDelightFluids;
 import com.lance5057.extradelight.ExtraDelightItems;
 import com.lance5057.extradelight.data.recipebuilders.BottleFluidRegistryRecipeBuilder;
 import com.lance5057.extradelight.modules.Fermentation;
+import com.lance5057.extradelight.modules.SummerCitrus;
 
 
 
@@ -126,6 +127,14 @@ public class BottleFluidRegistry {
 				FluidIngredientCompat.fromFluid(ExtraDelightFluids.NUT_BUTTER.FLUID.get(), bottleMB));
 		register(Ingredient.of(ExtraDelightItems.SWEET_BERRY_JUICE.get()),
 				FluidIngredientCompat.fromFluid(ExtraDelightFluids.SWEET_BERRY_JUICE.FLUID.get(), bottleMB));
+		register(Ingredient.of(SummerCitrus.LEMON_JUICE.get()),
+				FluidIngredientCompat.fromFluid(ExtraDelightFluids.LEMON_JUICE.FLUID.get(), bottleMB));
+		register(Ingredient.of(SummerCitrus.LIME_JUICE.get()),
+				FluidIngredientCompat.fromFluid(ExtraDelightFluids.LIME_JUICE.FLUID.get(), bottleMB));
+		register(Ingredient.of(SummerCitrus.ORANGE_JUICE.get()),
+				FluidIngredientCompat.fromFluid(ExtraDelightFluids.ORANGE_JUICE.FLUID.get(), bottleMB));
+		register(Ingredient.of(SummerCitrus.GRAPEFRUIT_JUICE.get()),
+				FluidIngredientCompat.fromFluid(ExtraDelightFluids.GRAPEFRUIT_JUICE.FLUID.get(), bottleMB));
 		register(Ingredient.of(ExtraDelightItems.TEA.get()),
 				FluidIngredientCompat.fromFluid(ExtraDelightFluids.TEA.FLUID.get(), bottleMB));
 		register(Ingredient.of(ExtraDelightItems.TOMATO_JUICE.get()),

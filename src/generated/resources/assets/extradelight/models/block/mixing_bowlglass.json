@@ -1,7 +1,6 @@
 {
   "parent": "extradelight:block/mixing_bowl",
   "textures": {
-    "1": "minecraft:block/glass",
-    "particle": "minecraft:block/glass"
+    "1": "minecraft:block/glass"
   }
 }

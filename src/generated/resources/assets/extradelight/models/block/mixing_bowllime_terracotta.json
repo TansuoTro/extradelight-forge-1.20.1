@@ -1,7 +1,6 @@
 {
   "parent": "extradelight:block/mixing_bowl",
   "textures": {
-    "1": "minecraft:block/lime_terracotta",
-    "particle": "minecraft:block/lime_terracotta"
+    "1": "minecraft:block/lime_terracotta"
   }
 }
